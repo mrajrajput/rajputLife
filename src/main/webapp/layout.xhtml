@@ -18,6 +18,10 @@
 		</div>
 		<div class="ui-g-12">
 			<p:toolbar>
+				<f:facet name="right" columns="1" >
+					<h:outputText value="Welcome #{myloginController.loggedUser}!"
+					rendered="#{myloginController.loggedUser ne null}"></h:outputText>
+				</f:facet>
 				<f:facet name="left" columns="3" >
 					<p:button href="/list" value="List of Products" />
 					<p:spacer width="10" />
