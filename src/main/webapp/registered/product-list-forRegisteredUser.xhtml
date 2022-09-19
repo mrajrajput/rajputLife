@@ -9,7 +9,11 @@
 
 	<ui:define name="content">
 		<h:form id="form">
+
 			<p:panel header="Products List - under Registered Directory - showing up with /account url ">
+				<h:graphicImage value="#{myloginController.picture}" cache="false" style="width:40px; border-radius: 100%;"/>
+				<img src="#{myloginController.picture}" style="width:40px; border-radius: 100%;"/>
+
 				<p:dataTable id="table" var="product" value="#{myloginController.products}">
 					<p:column>
 						<f:facet name="header"># Id</f:facet>

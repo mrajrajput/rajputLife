@@ -16,19 +16,21 @@ public class CustomOAuth2User implements OAuth2User {
 
 	@Autowired
 	private UserService userService;
+
+	private String picture;
 	
 	public CustomOAuth2User(OAuth2User oauth2User,  UserService userService) {
 		this.oauth2User = oauth2User;
 		this.userService = userService;
 	}
 
-//	public CustomOAuth2User(OAuth2User oauth2User) {
-//		this.oauth2User = oauth2User;
-//	}
-
 	@Override
 	public Map<String, Object> getAttributes() {
 		return oauth2User.getAttributes();
+	}
+
+	public String getPicture(){
+		return oauth2User.<String>getAttribute("picture");
 	}
 
 //	@Override
@@ -71,4 +73,6 @@ public class CustomOAuth2User implements OAuth2User {
 	public String getEmail() {
 		return oauth2User.<String>getAttribute("email");		
 	}
+
+
 }

@@ -11,16 +11,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title><ui:insert name="title">Default title</ui:insert></title>
 </h:head>
-<h:body>
+<h:body id="layoutBodyId">
+
 	<div class="ui-g">
 		<div class="ui-g-12">
 			<p:growl for="errors" showDetail="true" autoUpdate="true"/>
 		</div>
 		<div class="ui-g-12">
 			<p:toolbar>
-				<f:facet name="right" columns="1" >
-					<h:outputText value="Welcome #{myloginController.loggedUser}!"
-					rendered="#{myloginController.loggedUser ne null}"></h:outputText>
+				<f:facet name="right">
+					<img src="#{myloginController.picture}"
+						 style="width:40px; border-radius: 100%;"/>
+					<p:spacer width="4" />
+					<h:outputText value=" #{myloginController.loggedUser}"
+								  rendered="#{myloginController.loggedUser ne null}"></h:outputText>
 				</f:facet>
 				<f:facet name="left" columns="3" >
 					<p:button href="/list" value="List of Products" />

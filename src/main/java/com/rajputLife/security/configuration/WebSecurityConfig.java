@@ -18,6 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -76,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 					"/javax.faces.resource/*/*",
 					"/javax.faces.resource/*",
+					"/https://lh3.googleusercontent.com/*/*",
 
 //					 "/login",
 					"/oauth/**"
@@ -101,9 +103,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				//Both below works!! :)
 				//.defaultSuccessUrl("/product/product-list.jsf")
-				.defaultSuccessUrl("/product/product-list.jsf") //for login page use login.xhtml file path.
 
-				.failureUrl("/security/customLogin.xhtml")
+//				.defaultSuccessUrl("/product/product-list.jsf") //for login page use login.xhtml file path.
+				.defaultSuccessUrl("/registered/product-list-forRegisteredUser.jsf") //for login page use login.xhtml file path.
+
+				.failureUrl("/security/customLogin.jsf")
 
 
 			.and()
@@ -121,6 +125,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 							System.out.println("GrantedAuthority : " + auth.getAuthority());
 						}
 						CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+						oauthUser.getPicture();
 						//We are loading Roles for Google/FB during login here
 						userService.processOAuthPostLogin(oauthUser.getEmail());
 
