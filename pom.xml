@@ -10,6 +10,7 @@
 	<description>Spring Boot - Primefaces - JSF - URL ReWrite - SpringSecurity with Form and OAuth login - PF components</description>
 	<packaging>war</packaging>
 
+
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -19,10 +20,11 @@
 
 	<properties>
 		<rewrite-servlet.version>3.5.1.Final</rewrite-servlet.version>
-		<primefaces.version>12.0.0-RC3</primefaces.version>
+		<primefaces.version>11.0.0</primefaces.version>
 		<lombok.version>1.18.22</lombok.version>
 		<myfaces-impl.version>2.2.12</myfaces-impl.version>
 		<java.version>1.8</java.version>
+		<start-class>com.rajputLife.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -125,6 +127,13 @@
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>artifactId</artifactId>
+			<version>4.1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/omega-theme-5.0.0.jar</systemPath>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -138,6 +147,25 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- Primefaces - Omega - START-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<!-- Primefaces - Omega - END-->
+
+
 	</dependencies>
 
 	<!-- Package as an executable jar -->
@@ -147,13 +175,53 @@
 		 web applications (i.e. for embedded applications like Spring Boot).
 		 So we need to tweak the build process
 		 a bit to make Rewrite serve its purpose. -->
-		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+<!--		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>-->
 
+		<resources>
+			<resource>
+				<directory>src/main/webapp</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.8</version>
+				<executions>
+					<execution>
+						<id>generate-docs</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html</backend>
+							<doctype>book</doctype>
+						</configuration>
+					</execution>
+				</executions>
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>org.springframework.restdocs</groupId>-->
+<!--						<artifactId>spring-restdocs-asciidoctor</artifactId>-->
+<!--						<version>2.0.6</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
+
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>jitpack.io</id>-->
+<!--			<url>https://jitpack.io</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 </project>
