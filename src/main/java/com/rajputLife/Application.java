@@ -13,15 +13,20 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.rajputLife",
-				"com.rajputLife/*",  //don't remove this!!
-		"com.rajputLife.controller/*",
-		"com.rajputLife.controller",
-		"com.rajputLife.entity.security",
-		"com.rajputLife.security.configuration",
-		"com.rajputLife.security.oauth",
-		"com.rajputLife.security.userDetails",
-		"com.rajputLife.repository",
- 		"com.rajputLife.repository.security"}
+//				"com.rajputLife/*",  //don't remove this!!
+		"org.primefaces",
+//		"org.primefaces.pandora",
+		//"org.primefaces.pandora.view/*",
+
+//		"com.rajputLife.controller/*",
+//		"com.rajputLife.controller",
+//		"com.rajputLife.entity.security",
+//		"com.rajputLife.security.configuration",
+//		"com.rajputLife.security.oauth",
+//		"com.rajputLife.security.userDetails",
+//		"com.rajputLife.repository",
+// 		"com.rajputLife.repository.security"
+}
 
 			)
 public class Application { //extends SpringBootServletInitializer {

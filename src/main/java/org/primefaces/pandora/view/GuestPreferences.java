@@ -30,8 +30,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
-@Named
-@SessionScoped
+//@Named
+//@SessionScoped
 
 @Controller(value = "guestPreferences")
 @Scope(value = "session")
@@ -70,6 +70,7 @@ public class GuestPreferences implements Serializable {
 
     @PostConstruct
     public void init() {
+        System.out.println("TOMMY");
         componentThemes = new ArrayList<>();
         topbarThemes = new ArrayList<>();
         menuColors = new HashMap<>();
@@ -1136,6 +1137,7 @@ public class GuestPreferences implements Serializable {
     }
 
     public String getInputStyleClass() {
+        System.out.println("HELLO WORLD");
         return this.inputStyle.equals("filled") ? "ui-input-filled" : "";
     }
 

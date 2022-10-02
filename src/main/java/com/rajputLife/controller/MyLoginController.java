@@ -21,7 +21,8 @@ import java.util.List;
 @Scope(value = "session")
 @Component(value = "myloginController")
 @ELBeanName(value = "myloginController")
-@Join(path = "/account", to = "/registered/product-list-forRegisteredUser.jsf")
+//@Join(path = "/account", to = "/registered/product-list-forRegisteredUser.jsf")
+@Join(path = "/account", to = "/dashboard.jsf")
 public class MyLoginController {
 
  	private ProductRepository productRepository;

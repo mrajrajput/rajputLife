@@ -15,10 +15,17 @@
  */
 package org.primefaces.pandora.blockviewer;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
 import java.io.Serializable;
 
+//@Scope(value = "session")
+//@Component(value = "blockViewer")
+//@ELBeanName(value = "blockViewer")
 @FacesComponent(value="BlockViewer")
 public class BlockViewer extends UINamingContainer implements Serializable {
 

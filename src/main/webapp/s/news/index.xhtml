@@ -19,7 +19,7 @@
                                      paginator="true" rows="10" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="p-d-flex p-jc-between p-ai-center">
-                                    <p:commandButton styleClass="table-new" id="new" actionListener="#{newsBean.newStatus()}" type="button" value="#{msg['menu.new']}"
+                                    <p:commandButton lazy="true" styleClass="table-new" id="new" actionListener="#{newsBean.newStatus()}" type="button" value="#{msg['menu.new']}"
                                                      update="form:dlg form:dataTable" onclick="PF('dlg').show()" icon="pi pi-plus"/>
                                     <div class="customers-table-header table-search">
                                         <span class="ui-input-icon-left filter-container">

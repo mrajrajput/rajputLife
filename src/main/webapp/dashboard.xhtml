@@ -3,7 +3,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:po="http://primefaces.org/pandora"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">Dashboard</ui:define>
@@ -106,7 +105,7 @@
                                 newsrow.addClass('news-2-active');
                                 point2.addClass('active-point');
                             }
-                        } 
+                        }
                         e.preventDefault();
                 });
             });
@@ -140,7 +139,7 @@
                     e.preventDefault();
                 });
 
-               
+
             });
         </script>
 
@@ -309,7 +308,7 @@
                         }
                     }
                 });
-            
+
 
             var ctx4 = document.getElementById("chart4").getContext('2d');
             var myChart4 = new Chart(ctx4, {
@@ -432,7 +431,7 @@
                     }
                 });
            });
-     
+
         </script>
     </ui:define>
 
@@ -1286,7 +1285,7 @@
                     <div class="sales-content">
                         <p:dataTable id="productsTable" var="product" value="#{dataTableDemoView.products1}" reflow="true"
                                      paginatorPosition="bottom" size="small"
-                                     rowKey="#{product.id}" paginator="true" rows="5">
+                                     rowKey="#{product.id}" paginator="true" rows="5" lazy="false">
                             <p:column headerText="Id" sortBy="#{product.id}">
                                 <h:outputText value="#{product.id}"/>
                             </p:column>

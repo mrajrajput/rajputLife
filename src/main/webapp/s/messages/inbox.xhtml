@@ -14,6 +14,7 @@
                         <p:dataTable widgetVar="dataDT" id="dataTable" var="data" value="#{messageRecivedBean.messageDtoList}"
                                      reflow="true" style="min-height: 500px" resizableColumns="true"
                                      rowKey="#{data.id}" rowIndexVar="row"
+                                     lazy="true"
                                      paginator="true" rows="10" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="p-d-flex p-jc-between p-ai-center">

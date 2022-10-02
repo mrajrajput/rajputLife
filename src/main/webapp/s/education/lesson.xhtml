@@ -12,7 +12,7 @@
             <div class="grid crud-demo">
                 <div class="col-12">
                     <div class="card">
-                        <p:dataTable widgetVar="dataDT" id="dataTable" var="data" value="#{lessonBean.list}"
+                        <p:dataTable lazy="true" widgetVar="dataDT" id="dataTable" var="data" value="#{lessonBean.list}"
                                      reflow="true" style="min-height: 500px" resizableColumns="true"
                                      rowKey="#{data.id}" rowIndexVar="row"
                                      paginator="true" rows="10" paginatorPosition="bottom">

@@ -16,7 +16,8 @@
 package org.primefaces.pandora.view;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+//import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
