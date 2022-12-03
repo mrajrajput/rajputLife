@@ -3,14 +3,26 @@ package com.rajputLife.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Future;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.rajputLife.entity.FamilyMember;
+
+@Scope (value = "session")
+@Component (value = "userWizard")
+@ELBeanName(value = "userWizard")
 public class UserWizard implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,10 +31,16 @@ public class UserWizard implements Serializable {
 
 	private boolean skip;
 
-	@Future
+//	@Future
 	private LocalDate date2;
 
 	private LocalDate date6;
+	
+	@Autowired
+    public UserWizard() {
+		user = new User();
+		familyMemberList = new ArrayList<FamilyMember>();
+	}
 
 	public User getUser() {
 		return user;
@@ -51,18 +69,62 @@ public class UserWizard implements Serializable {
 	public void setSkip(boolean skip) {
 		this.skip = skip;
 	}
-
+	
 	public String onFlowProcess(FlowEvent event) {
-//        if (skip) {
-//            skip = false; //reset in case user goes back
-//            return "confirm";
-//        }
-//        else {
-//            return event.getNewStep();
-//        }
-
-		return event.getNewStep();
+        if (skip) {
+            skip = false; //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
 	}
+	
+	public String personToAdd;
+	public List<FamilyMember> familyMemberList;
+	
+	public void selectFamilyMember(SelectEvent<?> event) {
+		FamilyMember familyMember = new FamilyMember();
+		familyMember.setType((String) event.getObject());
+		personToAdd =  (String) event.getObject();
+		
+		//		familyMember.setType((String) event.getNewValue());
+		//		personToAdd =  (String) event.getNewValue();
+		//	    System.out.println("New value: " + event.getNewValue());
+	    
+	    System.out.println("New value: " + event.getObject());
+	}
+	
+	public void saveFather() {
+		System.out.println("Saving father");
+		FamilyMember familyMember = new FamilyMember();
+		familyMember.setType("Father");
+		familyMember.setFullName("test FullName");
+		familyMember.setGotra("Gothra");
+		familyMember.setMarried(true);
+		familyMember.setVillage("Test Village");
+		familyMemberList.add(familyMember);
+	}
+	
+	public void onRowEdit(RowEditEvent<Product> event) {
+        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject() ));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent<Product> event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject() ));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
 
 	public LocalDate getDate2() {
 		return date2;
@@ -78,5 +140,35 @@ public class UserWizard implements Serializable {
 
 	public void setDate6(LocalDate date6) {
 		this.date6 = date6;
+	}
+
+	public String getOnFlowProcess() {
+		return "";
+	}
+
+	public void setOnFlowProcess(String onFlowProcess) {
+	}
+	
+	public String getOnDateSelect() {
+		return "";
+	}
+
+	public void setOnDateSelect(String onDateSelect) {
+	}
+
+	public String getPersonToAdd() {
+		return personToAdd;
+	}
+
+	public void setPersonToAdd(String personToAdd) {
+		this.personToAdd = personToAdd;
+	}
+
+	public List<FamilyMember> getFamilyMemberList() {
+		return familyMemberList;
+	}
+
+	public void setFamilyMemberList(List<FamilyMember> familyMemberList) {
+		this.familyMemberList = familyMemberList;
 	}
 }

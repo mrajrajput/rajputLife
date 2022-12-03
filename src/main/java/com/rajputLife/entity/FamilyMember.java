@@ -1,14 +1,12 @@
 package com.rajputLife.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 
-@Getter
 @Setter
-@ToString
+@Getter
 @Entity
 @Table(name = "FamilyMember")
 public class FamilyMember {
@@ -40,6 +38,56 @@ public class FamilyMember {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fkPersonId")
 	private Person person;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getGotra() {
+		return gotra;
+	}
+
+	public void setGotra(String gotra) {
+		this.gotra = gotra;
+	}
+
+	public String getVillage() {
+		return village;
+	}
+
+	public void setVillage(String village) {
+		this.village = village;
+	}
+
+	public boolean isMarried() {
+		return isMarried;
+	}
+
+	public void setMarried(boolean isMarried) {
+		this.isMarried = isMarried;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+	
+	
 
 //we will below fields nullable even though they are coming from dropdown.
 

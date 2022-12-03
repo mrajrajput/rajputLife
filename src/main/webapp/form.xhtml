@@ -24,9 +24,6 @@
 	padding: 4px;
 }
 
-/* .grid {
-	width: 100%;
-} */
 .error {
 	color: red;
 }
@@ -43,19 +40,24 @@
 	padding: 1em;
 }
 
-/* #wizardCardId {
-								padding: 1em;
-								box-shadow: 5px 5px 10px 10px lightblue;
-							} */
-#wizardCardId {
+.wizardCardId {
 	margin-left: -20px;
 }
 
-#internalCardId {
+/* form Shadow and background color */
+.internalCardId {
 	/* position: absolute; */
 	/* position: relative;  */
-	box-shadow: 5px 5px 121px 149px lightpink;
-	background-color: seashell;
+	/* box-shadow: 25px 20px 3px -7px grey; */
+	box-shadow: 14px 13px lightgrey, 0em 0 0.45em grey;
+	/* box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%); */
+	/* background-color: lightgrey; */
+}
+
+/* Photo gallery shadow */
+#galleriaId {
+	box-shadow: -24px -23px 3px -7px lightpink;
+	box-shadow: 15px 16px 2px -5px grey;
 }
 
 #inlineId {
@@ -75,28 +77,40 @@
 	box-shadow: 30px 30px 35px 30px var(- -main-bg-color);
 }
 
+.textAlignToCenter {
+	text-align: -webkit-center;
+}
+
 body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 	font-size: 5rem;
 }
+
+/* form panel border */
+body .ui-panel .ui-panel-content {
+	border: 0px;
+}
 </style>
 
-		<h:form>
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true"
+				skipDetailIfEqualsSummary="true">
+				<p:autoUpdate />
+			</p:growl>
+				
 			<div class="grid">
-				<p:growl id="msgs" showDetail="true"
-					skipDetailIfEqualsSummary="true">
-					<p:autoUpdate />
-				</p:growl>
 
 				<div class="col-12 md:col-4">
-					<p:galleria value="#{galleriaView.photos}" var="photo"
-						numVisible="5"
-						responsiveOptions="#{galleriaView.responsiveOptions1}"
-						showItemNavigators="true" circular="true"
-						showItemNavigatorsOnHover="true" showThumbnails="false"
-						style="max-width: 640px">
-						<p:graphicImage name="#{photo.itemImageSrc}" alt="#{photo.alt}"
-							style="width: 100%; display: block;" />
-					</p:galleria>
+					<div id="galleriaId">
+						<p:galleria value="#{galleriaView.photos}" var="photo"
+							numVisible="5"
+							responsiveOptions="#{galleriaView.responsiveOptions1}"
+							showItemNavigators="true" circular="true"
+							showItemNavigatorsOnHover="true" showThumbnails="false"
+							style="max-width: 640px">
+							<p:graphicImage name="#{photo.itemImageSrc}" alt="#{photo.alt}"
+								style="width: 100%; display: block;" />
+						</p:galleria>
+					</div>
 					<p:spacer height="5px" />
 					<p:fileUpload listener="#{fileUploadView.handleFileUpload}"
 						mode="simple" skinSimple="true" label="upload your photos"
@@ -124,7 +138,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 								<p:panel>
 									<p:messages />
 
-									<div class="col-12 md:col-12" id="wizardCardId">
+									<div class="col-12 md:col-12 wizardCardId">
 										<!-- <div class="card ui-fluid">
 											<h5>Horizontal</h5>
 
@@ -144,7 +158,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 											</div>
 										</div> -->
 
-										<div class="card" id="internalCardId">
+										<div class="card internalCardId">
 
 											<!-- <div class="formgroup-inline">
 												<div class="field grid">
@@ -185,8 +199,6 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 													</div>
 												</div>
 											</div> -->
-
-
 											<!-- <div class="formgroup-inline field">
 												<p:outputLabel for="navigator" 
 													styleClass="col-12 mb-2 md:col-3 mb-md-0">
@@ -210,7 +222,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 												</p:outputLabel>
 												<div class="col-12 md:col-2">
 													<p:outputLabel for="timeonly12"/>
-													<p:datePicker id="timeonly12" value="#{userWizard.time6}"
+													<p:datePicker id="timeonly12" value="#{userWizard.date6}"
 														timeOnly="true" placeholder="Time of Birth"
 														hourFormat="12" pattern="HH:mm">
 													</p:datePicker>
@@ -219,8 +231,6 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 													<p:spacer />
 												</div>
 											</div> -->
-
-
 											<!-- <div class="field ui-fluid">
 												<div class="formgroup-inline field" >
 													<p:outputLabel for="name3"
@@ -262,7 +272,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 													</p:outputLabel>
 													<div class="col-12 md:col-2">
 														<p:outputLabel for="timeonly12" />
-														<p:datePicker id="timeonly12" value="#{userWizard.time6}"
+														<p:datePicker id="timeonly12" value="#{userWizard.date6}"
 															timeOnly="true" placeholder="Time of Birth"
 															hourFormat="12" pattern="HH:mm">
 														</p:datePicker>
@@ -271,26 +281,38 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 												
 											</div> -->
 
-
-
 											<div class="ui-fluid formgrid grid" id="inlineId">
 
 												<div class="formgroup-inline field">
+													<p:spacer width="1px" />
 													<p:outputLabel for="name3"
 														styleClass="col-12 mb-2 md:col-2 mb-md-0">
-														<div style="padding-top: 8px;">
-															<h4>Name:</h4>
+														<div style="padding-top: 1px;">
+															<!-- <h4>Name:</h4> -->
+															<p:badge value="Name" styleClass="mr-2" size="xlarge"
+																severity="warning"></p:badge>
 														</div>
 													</p:outputLabel>
-													<p:spacer width="2px" />
+
 
 													<div class="md:col-5">
-														<p:inputText id="name3" type="text"
-															placeholder="first name" />
+														<div class="ui-inputgroup ui-float-label">
+															<p:inputText id="name3" type="text" />
+															<p:outputLabel for="@previous" value="First Name" />
+															<div class="ui-inputgroup-addon">
+																<i class="pi pi-user"></i>
+															</div>
+
+														</div>
 													</div>
 													<div class="md:col-4">
-														<p:inputText id="lastName3" type="text"
-															placeholder="last name" />
+														<div class="ui-inputgroup ui-float-label">
+															<p:inputText id="lastName3" type="text" />
+															<p:outputLabel for="@previous" value="Last Name" />
+															<div class="ui-inputgroup-addon">
+																<i class="pi pi-user"></i>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -298,7 +320,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 
 											<div class="ui-fluid formgrid grid" id="inlineId">
 
-												<div class="field col-12 md:col-3">
+												<div class="field col-12 md:col-3 textAlignToCenter">
 													<p:outputLabel for="cityId">Date of Birth</p:outputLabel>
 													<div>
 														<p:datePicker id="navigators" numberOfMonths="1"
@@ -311,14 +333,38 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 														</p:datePicker>
 													</div>
 												</div>
-												<div class="field col-12 md:col-3">
+												<div class="field col-12 md:col-3 textAlignToCenter">
 													<p:outputLabel>Time of Birth</p:outputLabel>
 													<div>
 														<p:datePicker id="timeonly1233"
-															value="#{userWizard.time6}" timeOnly="true"
+															value="#{userWizard.date6}" timeOnly="true"
 															placeholder="Time of Birth" hourFormat="12"
 															pattern="HH:mm">
 														</p:datePicker>
+													</div>
+												</div>
+												<div class="field col-12 md:col-3 textAlignToCenter">
+													<p:outputLabel id="heightid">Height</p:outputLabel>
+													<div>
+														<p:selectOneMenu id="HeightId">
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+												<div class="field col-12 md:col-3 textAlignToCenter">
+													<p:outputLabel>Weight</p:outputLabel>
+													<div>
+														<p:selectOneMenu id="weightId">
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+														</p:selectOneMenu>
 													</div>
 												</div>
 
@@ -342,8 +388,7 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 												</div> -->
 											</div>
 
-											<!-- <p:spacer height="1px" /> -->
-
+											<p:spacer height="1px" />
 											<h5>Address</h5>
 											<div class="field ui-fluid">
 												<p:inputText id="addressLine1Id"
@@ -392,39 +437,290 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 								</p:panel>
 							</p:tab>
 
-							<p:tab id="address" title="Address">
-								<p:panel header="Address Details">
+							<p:tab id="moreInformationId" title="More information">
+								<p:panel>
 									<p:messages />
-									<h:panelGrid columns="2" columnClasses="label, value">
-										<h:outputText value="Street: " />
-										<p:inputText value="#{userWizard.user.street}" />
 
-										<h:outputText value="Postal Code: " />
-										<p:inputText value="#{userWizard.user.postalCode}" />
+									<div class="col-12 md:col-12 wizardCardId">
+										<div class="card internalCardId">
 
-										<h:outputText value="City: " />
-										<p:inputText value="#{userWizard.user.city}" />
+											<div class="ui-fluid formgrid grid">
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="educationId">Education(Highest)</p:outputLabel>
+													<div>
+														<p:inputText id="educationId" placeholder="Education" />
+													</div>
+												</div>
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="passingId">Year of Passing</p:outputLabel>
+													<div>
+														<p:selectOneMenu id="passingId">
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="languageId">Languages Known</p:outputLabel>
+													<p:selectOneMenu id="languageId">
+														<f:selectItem itemLabel="Select One" itemValue="#{null}"
+															noSelectionOption="true" />
+														<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+														<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+														<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+													</p:selectOneMenu>
+												</div>
+											</div>
 
-										<h:outputText value="Skip to last: " />
-										<h:selectBooleanCheckbox value="#{userWizard.skip}" />
-									</h:panelGrid>
+
+											<div class="ui-fluid formgrid grid">
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="employmentId">Employment</p:outputLabel>
+													<div>
+														<p:selectOneMenu id="employmentId">
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="salaryId">Salary(Approx)</p:outputLabel>
+													<div>
+														<p:selectOneMenu id="salaryId">
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="workExId">Work Experience</p:outputLabel>
+													<p:selectOneMenu id="workExId">
+														<f:selectItem itemLabel="Select One" itemValue="#{null}"
+															noSelectionOption="true" />
+														<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+														<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+														<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+													</p:selectOneMenu>
+												</div>
+												<div class="field col-12 md:col-3">
+													<p:outputLabel for="birthId">Place of Birth</p:outputLabel>
+													<p:selectOneMenu id="birthId">
+														<f:selectItem itemLabel="Select One" itemValue="#{null}"
+															noSelectionOption="true" />
+														<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+														<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+														<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+													</p:selectOneMenu>
+												</div>
+											</div>
+
+											<h5>About Me</h5>
+											<div class="field ui-fluid">
+												<p:inputTextarea id="aboutMeId"
+													placeholder="Inclue more infromation about you, which you want to convey to your spouce and spouce's family." />
+											</div>
+										</div>
+										 
+									</div>
 								</p:panel>
 							</p:tab>
 
 							<p:tab id="contact" title="Contact">
-								<p:panel header="Contact Information">
-									<p:messages />
-									<h:panelGrid columns="2" columnClasses="label, value">
-										<h:outputText value="Email: *" />
-										<p:inputText value="#{userWizard.user.email}" required="true"
-											label="Email" />
+								<p:panel>
+									<!-- <p:messages /> -->
 
-										<h:outputText value="Phone: " />
-										<p:inputText value="#{userWizard.user.phone}" />
+									<div class="ui-fluid formgrid grid">
+										<div class="col-12 md:col-12 wizardCardId">
+											<div class="card internalCardId">
 
-										<h:outputText value="Additional Info: " />
-										<p:inputText value="#{userWizard.user.info}" />
-									</h:panelGrid>
+												<h:panelGrid columns="3">
+													<h:panelGrid columns="1" styleClass="col-12 md:col-12">
+														<p:outputLabel for="personToAddId">Person to Add</p:outputLabel>
+														<p:selectOneMenu id="personToAddId"
+															styleClass="col-12 md:col-6">
+															<p:ajax event="itemSelect" update="@form"
+																listener="#{userWizard.selectFamilyMember}" />
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Father" itemValue="Father" />
+															<f:selectItem itemLabel="Mother" itemValue="Mother" />
+															<f:selectItem itemLabel="Brother" itemValue="Brother" />
+															<f:selectItem itemLabel="Sister" itemValue="Sister" />
+														</p:selectOneMenu>
+													</h:panelGrid>
+													<div />
+
+													<h:panelGroup>
+														<p:dataTable value="#{userWizard.familyMemberList}" var="book" 
+																	 editable="true" style="margin-bottom:20px">
+																	 
+															 <p:ajax event="rowEdit" listener="#{userWizard.onRowEdit}" update=":form:msgs"/>
+            												 <p:ajax event="rowEditCancel" listener="#{userWizard.onRowCancel}" update=":form:msgs"/>
+															
+															
+														    <p:column headerText="Full Name" style="width:7rem">
+														    	 <p:cellEditor>
+												                    <f:facet name="output">
+												                        <h:outputText value="#{book.fullName}" />
+												                    </f:facet>
+												                    <f:facet name="input">
+												                        <p:inputText id="modelInput" value="#{book.fullName}" style="width:100%"/>
+												                    </f:facet>
+												                </p:cellEditor>
+														    </p:column>
+														    
+														    <p:column headerText="Village" style="width:5rem">
+														    	<p:cellEditor>
+												                    <f:facet name="output">
+												                        <h:outputText value="#{book.village}" />
+												                    </f:facet>
+												                    <f:facet name="input">
+												                        <p:inputText id="modelInputVillage" value="#{book.village}" style="width:100%"/>
+												                    </f:facet>
+												                </p:cellEditor>
+														    </p:column>
+														    
+														    <p:column headerText="Gotra" style="width:4rem">
+														    	<p:cellEditor>
+												                    <f:facet name="output">
+												                        <h:outputText value="#{book.gotra}" />
+												                    </f:facet>
+												                    <f:facet name="input">
+												                        <p:inputText id="modelInputGotra" value="#{book.gotra}" style="width:100%"/>
+												                    </f:facet>
+												                </p:cellEditor>
+														    </p:column>
+														    
+														    <p:column style="width:2rem" headerText="Edit" >
+												                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+												            </p:column>
+												            
+												            <p:column style="width:3rem" headerText="Delete">
+												                <p:commandLink >
+												                	<i class="pi pi-times" style="font-size: 2rem" ></i>
+												                </p:commandLink>
+												            </p:column>
+														    
+														    
+														</p:dataTable>
+													</h:panelGroup>
+												</h:panelGrid>
+
+
+												<br />
+												<br />
+												<div id="selectFamilyMemberId"
+													class="field col-12 md:col-12">
+													<div class="ui-fluid formgrid grid">
+														<h:panelGroup
+															rendered="#{userWizard.personToAdd == 'Father'}">
+															<div class="field col-12 md:col-4">
+																<p:outputLabel for="nameformId">Father Name</p:outputLabel>
+																<div>
+																	<p:inputText id="nameformId" placeholder="Name" />
+																</div>
+															</div>
+															<div class="field col-12 md:col-2">
+																<p:outputLabel for="fatherGothraId">Father Gothra</p:outputLabel>
+																<div>
+																	<p:selectOneMenu id="fatherGothraId">
+																		<f:selectItem itemLabel="Select One"
+																			itemValue="#{null}" noSelectionOption="true" />
+																		<f:selectItem itemLabel="Option 1"
+																			itemValue="Option 1" />
+																		<f:selectItem itemLabel="Option 2"
+																			itemValue="Option 2" />
+																		<f:selectItem itemLabel="Option 3"
+																			itemValue="Option 3" />
+																	</p:selectOneMenu>
+																</div>
+															</div>
+															<div class="field col-12 md:col-3">
+																<p:outputLabel for="villageFormId">Father Village</p:outputLabel>
+																<p:selectOneMenu id="villageFormId">
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</div>
+															<div class="field col-12 md:col-3 ui-inputgroup">
+																<!-- <p:outputLabel value="Save Father"> </p:outputLabel> -->
+																<p:commandButton styleClass="rounded-button" value="Save Father" update="@form"  action="#{userWizard.saveFather()}" />
+															</div>  
+														</h:panelGroup>
+													</div>
+
+
+													<div class="ui-fluid formgrid grid">
+														<h:panelGroup
+															rendered="#{userWizard.personToAdd == 'Mother'}">
+															<div class="field col-12 md:col-4">
+																<p:outputLabel for="mothernameformId">Mother Name</p:outputLabel>
+																<div>
+																	<p:inputText id="mothernameformId" placeholder="Name" />
+																</div>
+															</div>
+															<div class="field col-12 md:col-3">
+																<p:outputLabel for="motherGothraId">Mother Gothra</p:outputLabel>
+																<div>
+																	<p:selectOneMenu id="motherGothraId">
+																		<f:selectItem itemLabel="Select One"
+																			itemValue="#{null}" noSelectionOption="true" />
+																		<f:selectItem itemLabel="Option 1"
+																			itemValue="Option 1" />
+																		<f:selectItem itemLabel="Option 2"
+																			itemValue="Option 2" />
+																		<f:selectItem itemLabel="Option 3"
+																			itemValue="Option 3" />
+																	</p:selectOneMenu>
+																</div>
+															</div>
+															<div class="field col-12 md:col-3">
+																<p:outputLabel for="mothervillageFormId">Mother Village</p:outputLabel>
+																<p:selectOneMenu id="mothervillageFormId">
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</div>
+														</h:panelGroup>
+													</div>
+
+
+													<div class="ui-fluid formgrid grid">
+														<h:panelGroup
+															rendered="#{userWizard.personToAdd == 'Brother'}">
+															<div class="field col-12 md:col-4">
+																<p:outputLabel for="brotherNameformId">Brother Name</p:outputLabel>
+																<div>
+																	<p:inputText id="brotherNameformId" placeholder="Name" />
+																</div>
+															</div>
+														</h:panelGroup>
+													</div>
+													 
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+
+									<br />
+
 								</p:panel>
 							</p:tab>
 
@@ -479,12 +775,12 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 									</h:panelGrid>
 
 									<p:commandButton value="Submit" action="#{userWizard.save}"
-										id="submitId" update="growl" process="@this" />
+										update="growl" process="@form" />
+
 								</p:panel>
 							</p:tab>
 
 						</p:wizard>
-
 
 
 					</div>
