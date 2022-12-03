@@ -557,10 +557,13 @@ body .ui-panel .ui-panel-content {
 															<f:selectItem itemLabel="Sister" itemValue="Sister" />
 														</p:selectOneMenu>
 													</h:panelGrid>
-													<div />
+													
+													<p:spacer width="50px" ></p:spacer>
 
 													<h:panelGroup>
-														<p:dataTable value="#{userWizard.familyMemberList}" var="book" 
+														<p:dataTable value="#{userWizard.familyMemberList}" var="book" rowHover="true"
+																	scrollable="true" scrollHeight="160" clientCache="false" scrollRows="3"
+																	cellEditMode="eager" liveResize="true" id="datatableForParentsId"
 																	 editable="true" style="margin-bottom:20px">
 																	 
 															 <p:ajax event="rowEdit" listener="#{userWizard.onRowEdit}" update=":form:msgs"/>
@@ -601,12 +604,14 @@ body .ui-panel .ui-panel-content {
 														    </p:column>
 														    
 														    <p:column style="width:2rem" headerText="Edit" >
-												                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+												                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row">
+												                	
+												                </p:rowEditor>
 												            </p:column>
 												            
 												            <p:column style="width:3rem" headerText="Delete">
-												                <p:commandLink >
-												                	<i class="pi pi-times" style="font-size: 2rem" ></i>
+												                <p:commandLink>
+												                	<i class="pi pi-times" style="font-size: 2rem; color: indianred;" ></i>
 												                </p:commandLink>
 												            </p:column>
 														    
