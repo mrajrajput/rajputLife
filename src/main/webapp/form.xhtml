@@ -89,6 +89,31 @@ body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 body .ui-panel .ui-panel-content {
 	border: 0px;
 }
+
+ui-column-title {
+	color: red;
+}
+/* Form Datatable edit button cancel button color */
+body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-close:before{
+	color: black;
+}
+/* Form Datatable edit button CheckMark button color */
+body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-check:before{
+	color: cyan;
+}
+/* Form Datatable edit button color */
+body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-pencil:before{
+	color: black;
+}
+/* Form Datatable header: color and background */
+body .ui-datatable thead th{
+	background: lightsteelblue;
+	color: black;
+}
+/*  Form Datatable Edit button press - background color of all column */
+body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
+	background: linear-gradient(45deg, black, transparent);
+}
 </style>
 
 		<h:form id="form">
@@ -558,7 +583,7 @@ body .ui-panel .ui-panel-content {
 														</p:selectOneMenu>
 													</h:panelGrid>
 													
-													<p:spacer width="50px" ></p:spacer>
+													<p:spacer width="10px" ></p:spacer>
 
 													<h:panelGroup>
 														<p:dataTable value="#{userWizard.familyMemberList}" var="book" rowHover="true"
@@ -569,8 +594,18 @@ body .ui-panel .ui-panel-content {
 															 <p:ajax event="rowEdit" listener="#{userWizard.onRowEdit}" update=":form:msgs"/>
             												 <p:ajax event="rowEditCancel" listener="#{userWizard.onRowCancel}" update=":form:msgs"/>
 															
+															<p:column headerText="Person" style="width:3rem;" class="ui-column-title">
+														    	 <p:cellEditor>
+												                    <f:facet name="output">
+												                        <h:outputText value="#{book.type}" />
+												                    </f:facet>
+												                    <f:facet name="input">
+												                        <p:inputText id="modelInputType" value="#{book.type}" style="width:100%"/>
+												                    </f:facet>
+												                </p:cellEditor>
+														    </p:column>
 															
-														    <p:column headerText="Full Name" style="width:7rem">
+														    <p:column headerText="Full Name" style="width:7rem;" class="ui-column-title">
 														    	 <p:cellEditor>
 												                    <f:facet name="output">
 												                        <h:outputText value="#{book.fullName}" />
