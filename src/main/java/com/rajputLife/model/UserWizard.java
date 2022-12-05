@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.event.CellEditEvent;
@@ -95,15 +98,38 @@ public class UserWizard implements Serializable {
 	    System.out.println("New value: " + event.getObject());
 	}
 	
-	public void saveFather() {
+	public void saveFamilyMember(Object type) {
 		System.out.println("Saving father");
+		//TODO write code to save in DB first
+		
 		FamilyMember familyMember = new FamilyMember();
-		familyMember.setType("Father");
+		familyMember.setType((String) type);
 		familyMember.setFullName("test FullName");
 		familyMember.setGotra("Gothra");
 		familyMember.setMarried(true);
 		familyMember.setVillage("Test Village");
 		familyMemberList.add(familyMember);
+		
+		/* Faces Message Pop-up */
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Family Member Added: ", familyMember.getFullName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public void deleteFamilyMember(Object type, Object name) {
+		//TODO write code to save in DB first
+		
+		Iterator<FamilyMember> itr = familyMemberList.iterator();
+        while (itr.hasNext()) {
+        	FamilyMember fm = itr.next();
+			if (fm.getType() == (String) type && fm.getFullName() == (String) name) {
+                itr.remove();
+                break;
+            }
+        }
+        
+        /* Faces Message Pop-up */
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, (String) type+" removed.", (String) name);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void onRowEdit(RowEditEvent<Product> event) {

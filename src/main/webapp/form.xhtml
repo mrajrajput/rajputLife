@@ -99,7 +99,8 @@ body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-close
 }
 /* Form Datatable edit button CheckMark button color */
 body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-check:before{
-	color: cyan;
+	color: mediumseagreen;
+	font-size: 2rem;
 }
 /* Form Datatable edit button color */
 body .ui-datatable .ui-datatable-data > tr .ui-row-editor .ui-icon.ui-icon-pencil:before{
@@ -112,7 +113,7 @@ body .ui-datatable thead th{
 }
 /*  Form Datatable Edit button press - background color of all column */
 body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
-	background: linear-gradient(45deg, black, transparent);
+	background: linear-gradient(45deg, seagreen, transparent);
 }
 </style>
 
@@ -575,11 +576,11 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 															<p:ajax event="itemSelect" update="@form"
 																listener="#{userWizard.selectFamilyMember}" />
 															<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																noSelectionOption="true" />
-															<f:selectItem itemLabel="Father" itemValue="Father" />
-															<f:selectItem itemLabel="Mother" itemValue="Mother" />
-															<f:selectItem itemLabel="Brother" itemValue="Brother" />
-															<f:selectItem itemLabel="Sister" itemValue="Sister" />
+																noSelectionOption="true" id="selectOneId" />
+															<f:selectItem itemLabel="Father" itemValue="Father"  id="fatherId" />
+															<f:selectItem itemLabel="Mother" itemValue="Mother" id="motherId" />
+															<f:selectItem itemLabel="Brother" itemValue="Brother" id="brotherId" />
+															<f:selectItem itemLabel="Sister" itemValue="Sister" id="sisterId"/>
 														</p:selectOneMenu>
 													</h:panelGrid>
 													
@@ -587,8 +588,9 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 
 													<h:panelGroup>
 														<p:dataTable value="#{userWizard.familyMemberList}" var="book" rowHover="true"
-																	scrollable="true" scrollHeight="160" clientCache="false" scrollRows="3"
-																	cellEditMode="eager" liveResize="true" id="datatableForParentsId"
+																	 rendered="#{not empty userWizard.familyMemberList}" rowIndexVar="id"
+																	 scrollable="true" scrollHeight="160" clientCache="false" scrollRows="3"
+																	 cellEditMode="eager" liveResize="true" id="datatableForParentsId"
 																	 editable="true" style="margin-bottom:20px">
 																	 
 															 <p:ajax event="rowEdit" listener="#{userWizard.onRowEdit}" update=":form:msgs"/>
@@ -645,7 +647,9 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 												            </p:column>
 												            
 												            <p:column style="width:3rem" headerText="Delete">
-												                <p:commandLink>
+												                <p:commandLink 
+												                	update="@form"
+												                	actionListener="#{userWizard.deleteFamilyMember(book.type, book.fullName ) }">
 												                	<i class="pi pi-times" style="font-size: 2rem; color: indianred;" ></i>
 												                </p:commandLink>
 												            </p:column>
@@ -660,6 +664,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 												<br />
 												<div id="selectFamilyMemberId"
 													class="field col-12 md:col-12">
+													
 													<div class="ui-fluid formgrid grid">
 														<h:panelGroup
 															rendered="#{userWizard.personToAdd == 'Father'}">
@@ -695,8 +700,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 																</p:selectOneMenu>
 															</div>
 															<div class="field col-12 md:col-3 ui-inputgroup">
-																<!-- <p:outputLabel value="Save Father"> </p:outputLabel> -->
-																<p:commandButton styleClass="rounded-button" value="Save Father" update="@form"  action="#{userWizard.saveFather()}" />
+																<p:commandButton styleClass="rounded-button" value="Save Father" update="@form"  actionListener="#{userWizard.saveFamilyMember('Father')}" />
 															</div>  
 														</h:panelGroup>
 													</div>
@@ -705,7 +709,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 													<div class="ui-fluid formgrid grid">
 														<h:panelGroup
 															rendered="#{userWizard.personToAdd == 'Mother'}">
-															<div class="field col-12 md:col-4">
+															<div class="field col-12 md:col-3">
 																<p:outputLabel for="mothernameformId">Mother Name</p:outputLabel>
 																<div>
 																	<p:inputText id="mothernameformId" placeholder="Name" />
@@ -736,6 +740,9 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
 																</p:selectOneMenu>
 															</div>
+															<div class="field col-12 md:col-3 ui-inputgroup">
+																<p:commandButton styleClass="rounded-button" value="Save Mother" update="@form"  actionListener="#{userWizard.saveFamilyMember('Mother')}" />
+															</div> 
 														</h:panelGroup>
 													</div>
 
@@ -749,6 +756,24 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 																	<p:inputText id="brotherNameformId" placeholder="Name" />
 																</div>
 															</div>
+															<div class="field col-12 md:col-3 ui-inputgroup">
+																<p:commandButton styleClass="rounded-button" value="Save Brother" update="@form"  actionListener="#{userWizard.saveFamilyMember('Brother')}" />
+															</div> 
+														</h:panelGroup>
+													</div>
+													
+													<div class="ui-fluid formgrid grid">
+														<h:panelGroup
+															rendered="#{userWizard.personToAdd == 'Sister'}">
+															<div class="field col-12 md:col-4">
+																<p:outputLabel for="sisterNameformId">Sister Name</p:outputLabel>
+																<div>
+																	<p:inputText id="sisterNameformId" placeholder="Name" />
+																</div>
+															</div>
+															<div class="field col-12 md:col-3 ui-inputgroup">
+																<p:commandButton styleClass="rounded-button" value="Save Sister" update="@form"  actionListener="#{userWizard.saveFamilyMember('Sister')}" />
+															</div> 
 														</h:panelGroup>
 													</div>
 													 
