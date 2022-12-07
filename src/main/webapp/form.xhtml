@@ -67,8 +67,8 @@
 :root { -
 	-main-bg-color: #{galleriaView.color
 }
-
 }
+
 .ui-galleria-content {
 	box-shadow: 30px 30px 35px 30px var(- -main-bg-color);
 }
@@ -79,6 +79,10 @@
 
 .textAlignToCenter {
 	text-align: -webkit-center;
+}
+
+.userClass {
+	background-image: url("#{resource['img/glyphicons-halflings.png']}");
 }
 
 body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
@@ -114,6 +118,16 @@ body .ui-datatable thead th{
 /*  Form Datatable Edit button press - background color of all column */
 body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 	background: linear-gradient(45deg, seagreen, transparent);
+}
+
+/* First tab, showing  */
+body .ui-button.ui-button-text-only .ui-button-text{
+	font-size: x-large;
+}
+
+/* First tab, girl color */
+body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button{
+	background: hotpink;
 }
 </style>
 
@@ -158,7 +172,37 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 
 						<p:wizard flowListener="#{userWizard.onFlowProcess}">
 
+							
+							
+							<p:tab id="personInformationId" titleStyle="userClass" closable="true" title="You">
+                
+								<p:panel>
+									<p:messages />
 
+									<div class="col-12 md:col-12 wizardCardId">
+										<div class="card internalCardId">
+
+											<div class="ui-fluid formgrid grid">
+													<div class="field col-12 md:col-4">
+														<p:spacer width="5px"/>
+													</div>
+													<div class="field col-12 md:col-4">
+														<h:panelGrid columns="1" >
+															<p:outputLabel id="profileForId" style="font-size: x-large;" >Who are you:</p:outputLabel>
+															<p:spacer width="5px"/>
+															<p:commandButton process="@this" partialSubmit="true" action="#{userWizard.whoAreYou('guardian')}" type="button" value="Guardian" styleClass="rounded-button ui-button-success" />
+														    <p:commandButton actionListener="#{userWizard.whoAreYou('bride')}" type="button" value="Bride" styleClass="rounded-button ui-button-help" />
+														    <p:commandButton actionListener="#{userWizard.whoAreYou('groom')}" type="button" value="Groom" styleClass="rounded-button" />
+										  				    <p:commandButton actionListener="#{userWizard.whoAreYou('admin')}" type="button" value="Admin" styleClass="rounded-button ui-button-warning" />
+														</h:panelGrid>
+													</div>
+											 </div>
+										 </div>
+									</div>
+								</p:panel>
+							</p:tab>
+							
+							
 
 							<p:tab id="personal" title="Personal">
 								<p:panel>
@@ -412,6 +456,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 														</p:selectOneMenu>
 													</div>
 												</div> -->
+											
 											</div>
 
 											<p:spacer height="1px" />
@@ -588,6 +633,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 
 													<h:panelGroup>
 														<p:dataTable value="#{userWizard.familyMemberList}" var="book" rowHover="true"
+																	 stickyHeader="true" stickyTopAt=".layout-topbar" stripedRows="true"
 																	 rendered="#{not empty userWizard.familyMemberList}" rowIndexVar="id"
 																	 scrollable="true" scrollHeight="160" clientCache="false" scrollRows="3"
 																	 cellEditMode="eager" liveResize="true" id="datatableForParentsId"
@@ -660,8 +706,14 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 												</h:panelGrid>
 
 
-												<br />
-												<br />
+ 												<br />
+												 <p:divider align="left">
+											        <div class="inline-flex align-items-center">
+											            <i class="pi pi-user mr-2"/>
+											            <b>Fill Below Information</b>
+											        </div>
+											    </p:divider>
+											    
 												<div id="selectFamilyMemberId"
 													class="field col-12 md:col-12">
 													
@@ -756,7 +808,10 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 																	<p:inputText id="brotherNameformId" placeholder="Name" />
 																</div>
 															</div>
-															<div class="field col-12 md:col-3 ui-inputgroup">
+															<div class="field col-12 md:col-2" style="padding-top: 2rem;">
+														        <p:selectBooleanCheckbox id="brotherMarriedformId" itemLabel="Married"/>
+														    </div>
+														    <div class="field col-12 md:col-3 ui-inputgroup">
 																<p:commandButton styleClass="rounded-button" value="Save Brother" update="@form"  actionListener="#{userWizard.saveFamilyMember('Brother')}" />
 															</div> 
 														</h:panelGroup>
@@ -771,6 +826,11 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 																	<p:inputText id="sisterNameformId" placeholder="Name" />
 																</div>
 															</div>
+															
+															<div class="field col-12 md:col-2" style="padding-top: 2rem;">
+														        <p:selectBooleanCheckbox id="sisterMarriedformId" itemLabel="Married"/>
+														    </div>
+															
 															<div class="field col-12 md:col-3 ui-inputgroup">
 																<p:commandButton styleClass="rounded-button" value="Save Sister" update="@form"  actionListener="#{userWizard.saveFamilyMember('Sister')}" />
 															</div> 

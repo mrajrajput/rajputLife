@@ -132,6 +132,29 @@ public class UserWizard implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
+	public String whoAmIColor;
+	
+	public void whoAreYou(Object whoamI) {
+		System.out.println(whoamI);
+		
+		switch((String) whoamI) {
+			case "guardian":
+				whoAmIColor = "green";
+				break;
+			case "bride":
+				whoAmIColor = "pink";
+				break;
+			case "groom":
+				whoAmIColor = "blue";
+				break;
+			case "admin":
+				whoAmIColor = "red";
+				break;
+			default:
+				System.out.println("none of the above");
+		}
+	}
+	
 	public void onRowEdit(RowEditEvent<Product> event) {
         FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject() ));
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -196,5 +219,13 @@ public class UserWizard implements Serializable {
 
 	public void setFamilyMemberList(List<FamilyMember> familyMemberList) {
 		this.familyMemberList = familyMemberList;
+	}
+
+	public String getWhoAmIColor() {
+		return whoAmIColor;
+	}
+
+	public void setWhoAmIColor(String whoAmIColor) {
+		this.whoAmIColor = whoAmIColor;
 	}
 }
