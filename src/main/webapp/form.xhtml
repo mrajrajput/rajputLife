@@ -65,8 +65,8 @@
 }
 
 :root { -
-	-main-bg-color: #{galleriaView.color
-}
+	-main-bg-color: #{galleriaView.color};
+	-first-page-color: #{userWizard.whoAmIColor};
 }
 
 .ui-galleria-content {
@@ -123,12 +123,18 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight{
 /* First tab, showing  */
 body .ui-button.ui-button-text-only .ui-button-text{
 	font-size: x-large;
+	color: black;
 }
 
 /* First tab, girl color */
 body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button{
 	background: hotpink;
 }
+
+/* /* tab highlight color */
+body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight{
+	background: var(- -first-page-color);
+} */
 </style>
 
 		<h:form id="form">
@@ -163,8 +169,41 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 
 					<!-- <p:effect type="bounce" event="click" /> -->
 				</div>
+				
+			<h:panelGroup rendered="#{!userWizard.whoAmIselected}">
+				<div class="col-12 md:col-8">
+					<div class="card">
+						<p:growl id="growlForSelectionFirstId" sticky="true" showDetail="true" />
+						<p:panel>
+								<p:messages />
 
+								<div class="col-12 md:col-12 wizardCardId">
+									<div class="card internalCardId" style="background: radial-gradient(red, transparent);">
 
+										<div class="ui-fluid formgrid grid">
+												<div class="field col-12 md:col-4">
+													<p:spacer width="5px"/>
+												</div>
+												<div class="field col-12 md:col-4">
+													<h:panelGrid columns="1" >
+														<p:outputLabel id="profileForId" style="font-size: x-large;" >Who are you:</p:outputLabel>
+														<p:spacer width="5px"/>
+														<p:commandButton action="#{userWizard.whoAreYou('guardian')}" update="@form" value="Guardian" styleClass="rounded-button ui-button-success" />
+													    <p:commandButton actionListener="#{userWizard.whoAreYou('bride')}" update="@form" value="Bride" styleClass="rounded-button ui-button-help" />
+													    <p:commandButton actionListener="#{userWizard.whoAreYou('groom')}" update="@form" value="Groom" styleClass="rounded-button" />
+									  				    <p:commandButton actionListener="#{userWizard.whoAreYou('admin')}" update="@form" value="Admin" styleClass="rounded-button ui-button-warning" />
+													 </h:panelGrid>
+												</div>
+										 </div>
+									 </div>
+								</div>
+							</p:panel>
+					</div>
+				</div>
+			</h:panelGroup>
+					
+
+			<h:panelGroup rendered="#{userWizard.whoAmIselected}">
 				<div class="col-12 md:col-8">
 					<div class="card">
 
@@ -172,189 +211,29 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 
 						<p:wizard flowListener="#{userWizard.onFlowProcess}">
 
-							
-							
-							<p:tab id="personInformationId" titleStyle="userClass" closable="true" title="You">
-                
-								<p:panel>
-									<p:messages />
-
-									<div class="col-12 md:col-12 wizardCardId">
-										<div class="card internalCardId">
-
-											<div class="ui-fluid formgrid grid">
-													<div class="field col-12 md:col-4">
-														<p:spacer width="5px"/>
-													</div>
-													<div class="field col-12 md:col-4">
-														<h:panelGrid columns="1" >
-															<p:outputLabel id="profileForId" style="font-size: x-large;" >Who are you:</p:outputLabel>
-															<p:spacer width="5px"/>
-															<p:commandButton process="@this" partialSubmit="true" action="#{userWizard.whoAreYou('guardian')}" type="button" value="Guardian" styleClass="rounded-button ui-button-success" />
-														    <p:commandButton actionListener="#{userWizard.whoAreYou('bride')}" type="button" value="Bride" styleClass="rounded-button ui-button-help" />
-														    <p:commandButton actionListener="#{userWizard.whoAreYou('groom')}" type="button" value="Groom" styleClass="rounded-button" />
-										  				    <p:commandButton actionListener="#{userWizard.whoAreYou('admin')}" type="button" value="Admin" styleClass="rounded-button ui-button-warning" />
-														</h:panelGrid>
-													</div>
-											 </div>
-										 </div>
-									</div>
-								</p:panel>
-							</p:tab>
-							
-							
-
 							<p:tab id="personal" title="Personal">
 								<p:panel>
 									<p:messages />
 
 									<div class="col-12 md:col-12 wizardCardId">
-										<!-- <div class="card ui-fluid">
-											<h5>Horizontal</h5>
-
-											<div class="field grid">
-												<p:outputLabel for="name3"
-													styleClass="col-12 mb-2 md:col-2 mb-md-0">Name</p:outputLabel>
-												<div class="col-12 md:col-10">
-													<p:inputText id="name3" />
-												</div>
-											</div>
-											<div class="field grid">
-												<p:outputLabel for="email3"
-													styleClass="col-12 mb-2 md:col-2 mb-md-0">Email</p:outputLabel>
-												<div class="col-12 md:col-10">
-													<p:inputText id="email3" />
-												</div>
-											</div>
-										</div> -->
-
 										<div class="card internalCardId">
-
-											<!-- <div class="formgroup-inline">
-												<div class="field grid">
-													<p:outputLabel for="name3"
-														styleClass="col-12 mb-2 md:col-2 mb-md-0">
-														<h4>Name</h4>
-													</p:outputLabel>
-													<div class="col-12 md:col-4">
-														<p:inputText id="name3" type="text"
-															placeholder="first name" />
-													</div>
-													<div class="col-12 md:col-1">
-														<p:spacer />
-													</div>
-													<div class="col-12 md:col-4">
-														<p:inputText id="lastName3" type="text"
-															placeholder="last name" />
-													</div>
-												</div>
-											</div>
 											
-											<div class="formgroup-inline">
-												<div class="field grid">
-													<p:outputLabel for="name3fdf"
-														styleClass="col-12 mb-2 md:col-2 mb-md-0">
-														<h4>Name</h4>
-													</p:outputLabel>
-													<div class="col-12 md:col-4">
-														<p:inputText id="name3fdf" type="text"
-															placeholder="first name" />
+											<!-- Line 1 -->
+ 									      <!-- <div class="ui-fluid formgrid grid" id="inlineId">
+												<div class="md:col-3"></div>
+													<div class="ui-inputgroup ui-float-label">
+														 <p:commandButton icon="pi pi-times" 
+														 			actionListener="#{userWizard.whoAreYou('none')}" 
+														 			update="@form" value="Press me if Not #{userWizard.whoAmI}" 
+														 			styleClass="rounded-button ui-button-danger  col-12 mb-5 md:col-1 mb-md-0">
+														 </p:commandButton>
 													</div>
-													<div class="col-12 md:col-1">
-														<p:spacer />
-													</div>
-													<div class="col-12 md:col-4">
-														<p:inputText id="lastName3dd" type="text"
-															placeholder="last name" />
-													</div>
-												</div>
-											</div> -->
-											<!-- <div class="formgroup-inline field">
-												<p:outputLabel for="navigator" 
-													styleClass="col-12 mb-2 md:col-3 mb-md-0">
-													<h5>Date of Birth</h5>
-												</p:outputLabel>
-												<div class="field col-12 md:col-2">
-													<p:datePicker id="navigator" numberOfMonths="1"
-														placeholder="Date of Birth" value="#{userWizard.date2}"
-														monthNavigator="true" yearNavigator="true" showWeek="true">
+											</div>  -->
 
-														<p:ajax event="dateSelect"
-															listener="#{userWizard.onDateSelect}" update="msgs" />
-													</p:datePicker>
-												</div>
-												<div class="col-12 md:col-1">
-													<p:spacer />
-												</div>
-												<p:outputLabel for="timeonly12"
-													styleClass="col-12 mb-2 md:col-3 mb-md-0">
-													<h5>Time of Birth</h5>
-												</p:outputLabel>
-												<div class="col-12 md:col-2">
-													<p:outputLabel for="timeonly12"/>
-													<p:datePicker id="timeonly12" value="#{userWizard.date6}"
-														timeOnly="true" placeholder="Time of Birth"
-														hourFormat="12" pattern="HH:mm">
-													</p:datePicker>
-												</div>
-												<div class="col-12 md:col-1">
-													<p:spacer />
-												</div>
-											</div> -->
-											<!-- <div class="field ui-fluid">
-												<div class="formgroup-inline field" >
-													<p:outputLabel for="name3"
-														styleClass="col-12 mb-2 md:col-2 mb-md-0">
-														<h5>Namebb:</h5>
-													</p:outputLabel>
-													<div class="md:col-4">
-														<p:inputText id="name3" type="text"
-															placeholder="first name" />
-													</div>
-													<div class="md:col-4">
-														<p:inputText id="lastName3" type="text"
-															placeholder="last name" />
-													</div>
-													<div class="col-12 md:col-2">
-														<p:spacer />
-													</div>
-												</div>
-
-												<div class="formgroup-inline field"  >
-													<p:outputLabel for="navigator"
-														styleClass="col-12 mb-2 md:col-3 mb-md-0">
-														<h5>Date of Birth</h5>
-													</p:outputLabel>
-													<div class="field col-12 md:col-3">
-														<p:datePicker id="navigator" numberOfMonths="1"
-															placeholder="Date of Birth" value="#{userWizard.date2}"
-															monthNavigator="true" yearNavigator="true"
-															showWeek="true">
-
-															<p:ajax event="dateSelect"
-																listener="#{userWizard.onDateSelect}" update="msgs" />
-														</p:datePicker>
-													</div> 
-
-													<p:outputLabel for="timeonly12"
-														styleClass="col-12 mb-2 md:col-3 mb-md-0">
-														<h5>Time of Birth</h5>
-													</p:outputLabel>
-													<div class="col-12 md:col-2">
-														<p:outputLabel for="timeonly12" />
-														<p:datePicker id="timeonly12" value="#{userWizard.date6}"
-															timeOnly="true" placeholder="Time of Birth"
-															hourFormat="12" pattern="HH:mm">
-														</p:datePicker>
-													</div>
-												</div>
-												
-											</div> -->
-
+											<!-- Line 2 -->
 											<div class="ui-fluid formgrid grid" id="inlineId">
-
 												<div class="formgroup-inline field">
-													<p:spacer width="1px" />
+													
 													<p:outputLabel for="name3"
 														styleClass="col-12 mb-2 md:col-2 mb-md-0">
 														<div style="padding-top: 1px;">
@@ -363,9 +242,8 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 																severity="warning"></p:badge>
 														</div>
 													</p:outputLabel>
-
-
-													<div class="md:col-5">
+													
+													<div class="md:col-4">
 														<div class="ui-inputgroup ui-float-label">
 															<p:inputText id="name3" type="text" />
 															<p:outputLabel for="@previous" value="First Name" />
@@ -384,12 +262,18 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 															</div>
 														</div>
 													</div>
+													<div class="md:col-2">
+														<p:commandButton icon="pi pi-times" 
+														 			actionListener="#{userWizard.whoAreYou('none')}" 
+														 			update="@form" value="Go Back" 
+														 			styleClass="rounded-button ui-button-danger">
+														 </p:commandButton>
+													</div>
 												</div>
 											</div>
 
-
+											<!-- Line 3 -->
 											<div class="ui-fluid formgrid grid" id="inlineId">
-
 												<div class="field col-12 md:col-3 textAlignToCenter">
 													<p:outputLabel for="cityId">Date of Birth</p:outputLabel>
 													<div>
@@ -437,26 +321,6 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 														</p:selectOneMenu>
 													</div>
 												</div>
-
-												<!-- <div class="field col-12 md:col-3">
-													<p:outputLabel for="pinCodeIdrere">Pin Code</p:outputLabel>
-													<div>
-														<p:inputText id="pinCodeIdrere" placeholder="postal code" />
-													</div>
-												</div>
-												<div class="field col-12 md:col-3">
-													<p:outputLabel for="countryIdere">Country</p:outputLabel>
-													<div>
-														<p:selectOneMenu id="countryIdere">
-															<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																noSelectionOption="true" />
-															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-														</p:selectOneMenu>
-													</div>
-												</div> -->
-											
 											</div>
 
 											<p:spacer height="1px" />
@@ -904,13 +768,18 @@ body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help > .ui-button
 
 								</p:panel>
 							</p:tab>
-
+                           <p:button id="dfdfsf" />
 						</p:wizard>
 
 
 					</div>
 				</div>
+			</h:panelGroup>
+
 			</div>
+
+			
+			
 		</h:form>
 
 

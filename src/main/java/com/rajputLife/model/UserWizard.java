@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
 
 import com.rajputLife.entity.FamilyMember;
 
-@Scope (value = "session")
-@Component (value = "userWizard")
+@Scope(value = "session")
+@Component(value = "userWizard")
 @ELBeanName(value = "userWizard")
 public class UserWizard implements Serializable {
 
@@ -34,13 +34,13 @@ public class UserWizard implements Serializable {
 
 	private boolean skip;
 
-//	@Future
+	// @Future
 	private LocalDate date2;
 
 	private LocalDate date6;
-	
+
 	@Autowired
-    public UserWizard() {
+	public UserWizard() {
 		user = new User();
 		familyMemberList = new ArrayList<FamilyMember>();
 	}
@@ -72,36 +72,35 @@ public class UserWizard implements Serializable {
 	public void setSkip(boolean skip) {
 		this.skip = skip;
 	}
-	
+
 	public String onFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false; //reset in case user goes back
-            return "confirm";
-        }
-        else {
-            return event.getNewStep();
-        }
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
 	}
-	
+
 	public String personToAdd;
 	public List<FamilyMember> familyMemberList;
-	
+
 	public void selectFamilyMember(SelectEvent<?> event) {
 		FamilyMember familyMember = new FamilyMember();
 		familyMember.setType((String) event.getObject());
-		personToAdd =  (String) event.getObject();
-		
-		//		familyMember.setType((String) event.getNewValue());
-		//		personToAdd =  (String) event.getNewValue();
-		//	    System.out.println("New value: " + event.getNewValue());
-	    
-	    System.out.println("New value: " + event.getObject());
+		personToAdd = (String) event.getObject();
+
+		// familyMember.setType((String) event.getNewValue());
+		// personToAdd =  (String) event.getNewValue();
+		// System.out.println("New value: " + event.getNewValue());
+
+		System.out.println("New value: " + event.getObject());
 	}
-	
+
 	public void saveFamilyMember(Object type) {
 		System.out.println("Saving father");
 		//TODO write code to save in DB first
-		
+
 		FamilyMember familyMember = new FamilyMember();
 		familyMember.setType((String) type);
 		familyMember.setFullName("test FullName");
@@ -109,71 +108,86 @@ public class UserWizard implements Serializable {
 		familyMember.setMarried(true);
 		familyMember.setVillage("Test Village");
 		familyMemberList.add(familyMember);
-		
+
 		/* Faces Message Pop-up */
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Family Member Added: ", familyMember.getFullName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Family Member Added: ",
+				familyMember.getFullName());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
 	public void deleteFamilyMember(Object type, Object name) {
 		//TODO write code to save in DB first
-		
+
 		Iterator<FamilyMember> itr = familyMemberList.iterator();
-        while (itr.hasNext()) {
-        	FamilyMember fm = itr.next();
+		while (itr.hasNext()) {
+			FamilyMember fm = itr.next();
 			if (fm.getType() == (String) type && fm.getFullName() == (String) name) {
-                itr.remove();
-                break;
-            }
-        }
-        
-        /* Faces Message Pop-up */
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, (String) type+" removed.", (String) name);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+				itr.remove();
+				break;
+			}
+		}
+
+		/* Faces Message Pop-up */
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, (String) type + " removed.", (String) name);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
+
+	public boolean whoAmIselected;
+
 	public String whoAmIColor;
-	
-	public void whoAreYou(Object whoamI) {
-		System.out.println(whoamI);
-		
-		switch((String) whoamI) {
-			case "guardian":
-				whoAmIColor = "green";
-				break;
-			case "bride":
-				whoAmIColor = "pink";
-				break;
-			case "groom":
-				whoAmIColor = "blue";
-				break;
-			case "admin":
-				whoAmIColor = "red";
-				break;
-			default:
-				System.out.println("none of the above");
+	public String whoAmI;
+
+	public void whoAreYou(Object whoamILocal) {
+		whoAmI = (String) whoamILocal;
+		//return onFlowProcess(new FlowEvent(null, "personInformationId", "personal"));
+
+		whoAmIColor = "#007ad9";
+		System.out.println(whoamILocal);
+
+		switch ((String) whoamILocal) {
+		case "guardian":
+			whoAmIColor = "green";
+			whoAmIselected = true;
+			break;
+		case "bride":
+			whoAmIColor = "pink";
+			whoAmIselected = true;
+			break;
+		case "groom":
+			whoAmIColor = "blue";
+			whoAmIselected = true;
+			break;
+		case "admin":
+			whoAmIColor = "red";
+			whoAmIselected = true;
+			break;
+		case "none":
+			whoAmIselected = false;
+		default:
+			System.out.println("none of the above");
 		}
 	}
-	
+
 	public void onRowEdit(RowEditEvent<Product> event) {
-        FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject() ));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+		FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject()));
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 
-    public void onRowCancel(RowEditEvent<Product> event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject() ));
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+	public void onRowCancel(RowEditEvent<Product> event) {
+		FacesMessage msg = new FacesMessage("Edit Cancelled", String.valueOf(event.getObject()));
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
+	public void onCellEdit(CellEditEvent event) {
+		Object oldValue = event.getOldValue();
+		Object newValue = event.getNewValue();
 
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
+		if (newValue != null && !newValue.equals(oldValue)) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
+					"Old: " + oldValue + ", New:" + newValue);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
 
 	public LocalDate getDate2() {
 		return date2;
@@ -197,7 +211,7 @@ public class UserWizard implements Serializable {
 
 	public void setOnFlowProcess(String onFlowProcess) {
 	}
-	
+
 	public String getOnDateSelect() {
 		return "";
 	}
@@ -227,5 +241,21 @@ public class UserWizard implements Serializable {
 
 	public void setWhoAmIColor(String whoAmIColor) {
 		this.whoAmIColor = whoAmIColor;
+	}
+
+	public boolean isWhoAmIselected() {
+		return whoAmIselected;
+	}
+
+	public void setWhoAmIselected(boolean whoAmIselected) {
+		this.whoAmIselected = whoAmIselected;
+	}
+
+	public String getWhoAmI() {
+		return whoAmI;
+	}
+
+	public void setWhoAmI(String whoAmI) {
+		this.whoAmI = whoAmI;
 	}
 }
