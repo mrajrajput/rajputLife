@@ -38,6 +38,10 @@ public class UserWizard implements Serializable {
 	private LocalDate date2;
 
 	private LocalDate date6;
+	
+	private LocalDate divorceDate;
+	
+	private LocalDate widowDate;
 
 	@Autowired
 	public UserWizard() {
@@ -64,6 +68,30 @@ public class UserWizard implements Serializable {
 		facesContext.addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", event.getObject().format(formatter)));
 	}
+	
+	public boolean divorsed = false;
+	public boolean widow = false;
+
+	public void divorsedListener() {
+		if(!divorsed) {
+			widow = false;
+			divorsed = false;
+		}else {
+			widow = false;
+			divorsed = true;
+		}
+	}
+	
+	public void widowListener() {
+		if(!widow) {
+			widow = false;
+			divorsed = false;
+		}else {
+			widow = true;
+			divorsed = false;
+		}
+	}
+	
 
 	public boolean isSkip() {
 		return skip;
@@ -257,5 +285,45 @@ public class UserWizard implements Serializable {
 
 	public void setWhoAmI(String whoAmI) {
 		this.whoAmI = whoAmI;
+	}
+
+	public String getDateOfDivorce() {
+		return "";
+	}
+
+	public void setDateOfDivorce(String dateOfDivorce) {
+//		this.dateOfDivorce = dateOfDivorce;
+	}
+
+	public LocalDate getDivorceDate() {
+		return divorceDate;
+	}
+
+	public void setDivorceDate(LocalDate divorceDate) {
+		this.divorceDate = divorceDate;
+	}
+
+	public LocalDate getWidowDate() {
+		return widowDate;
+	}
+
+	public void setWidowDate(LocalDate widowDate) {
+		this.widowDate = widowDate;
+	}
+
+	public boolean isDivorsed() {
+		return divorsed;
+	}
+
+	public void setDivorsed(boolean divorsed) {
+		this.divorsed = divorsed;
+	}
+
+	public boolean isWidow() {
+		return widow;
+	}
+
+	public void setWidow(boolean widow) {
+		this.widow = widow;
 	}
 }
