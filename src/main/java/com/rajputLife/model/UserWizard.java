@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.primefaces.event.CellEditEvent;
@@ -79,6 +80,19 @@ public class UserWizard implements Serializable {
 		}else {
 			widow = false;
 			divorsed = true;
+		}
+	}
+	
+	public boolean showNextButtonOnGuardian;
+	public String whoAreYouRelationship;
+	
+	public void selectRelationship(ValueChangeEvent event) {
+		String newVal = (String) event.getNewValue();
+		if (newVal == null) {
+//		if(whoAreYouRelationship.equalsIgnoreCase("Select One")){
+			showNextButtonOnGuardian = false;
+		}else {
+			showNextButtonOnGuardian = true;
 		}
 	}
 	
@@ -161,6 +175,8 @@ public class UserWizard implements Serializable {
 	}
 
 	public boolean whoAmIselected;
+	public boolean guardianSelected;
+	public boolean showForm;
 
 	public String whoAmIColor;
 	public String whoAmI;
@@ -173,26 +189,39 @@ public class UserWizard implements Serializable {
 		System.out.println(whoamILocal);
 
 		switch ((String) whoamILocal) {
-		case "guardian":
-			whoAmIColor = "green";
-			whoAmIselected = true;
-			break;
-		case "bride":
-			whoAmIColor = "pink";
-			whoAmIselected = true;
-			break;
-		case "groom":
-			whoAmIColor = "blue";
-			whoAmIselected = true;
-			break;
-		case "admin":
-			whoAmIColor = "red";
-			whoAmIselected = true;
-			break;
-		case "none":
-			whoAmIselected = false;
-		default:
-			System.out.println("none of the above");
+			case "guardian":
+				whoAmIColor = "green";
+				whoAmIselected = true;
+				guardianSelected = true;
+				showForm = false;
+				break;
+			case "guardianNext":
+				whoAmIColor = "green";
+				whoAmIselected = true;
+				guardianSelected = true;
+				showForm = true;
+				break;
+			case "bride":
+				whoAmIColor = "pink";
+				whoAmIselected = true;
+				showForm = true;
+				break;
+			case "groom":
+				whoAmIColor = "blue";
+				whoAmIselected = true;
+				showForm = true;
+				break;
+			case "admin":
+				whoAmIColor = "red";
+				whoAmIselected = true;
+				showForm = true;
+				break;
+			case "none":
+				whoAmIselected = false;
+				guardianSelected = false;
+				showForm = false;
+			default:
+				System.out.println("none of the above");
 		}
 	}
 
@@ -325,5 +354,37 @@ public class UserWizard implements Serializable {
 
 	public void setWidow(boolean widow) {
 		this.widow = widow;
+	}
+
+	public boolean isGuardianSelected() {
+		return guardianSelected;
+	}
+
+	public void setGuardianSelected(boolean guardianSelected) {
+		this.guardianSelected = guardianSelected;
+	}
+
+	public boolean isShowForm() {
+		return showForm;
+	}
+
+	public void setShowForm(boolean showForm) {
+		this.showForm = showForm;
+	}
+
+	public boolean isShowNextButtonOnGuardian() {
+		return showNextButtonOnGuardian;
+	}
+
+	public void setShowNextButtonOnGuardian(boolean showNextButtonOnGuardian) {
+		this.showNextButtonOnGuardian = showNextButtonOnGuardian;
+	}
+
+	public String getWhoAreYouRelationship() {
+		return whoAreYouRelationship;
+	}
+
+	public void setWhoAreYouRelationship(String whoAreYouRelationship) {
+		this.whoAreYouRelationship = whoAreYouRelationship;
 	}
 }
