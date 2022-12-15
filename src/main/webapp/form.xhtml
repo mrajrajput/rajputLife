@@ -3,15 +3,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
-
 	<ui:define name="title">Form Page</ui:define>
-
 	<ui:define name="viewname">
 		<li>UI Kit</li>
 		<li><i class="pi pi-angle-right" /></li>
 		<li><p:link outcome="/form">Form</p:link></li>
 	</ui:define>
-
 	<ui:define name="content">
 		<style>
 .label {
@@ -32,10 +29,6 @@
 	font-weight: bold;
 }
 
-/* .grid {
-								width: 33%;
-								padding: 4px;
-							} */
 .card {
 	padding: 1em;
 }
@@ -43,17 +36,13 @@
 .wizardCardId {
 	margin-left: -20px;
 }
-
 /* form Shadow and background color */
-.internalCardId {
-	/* position: absolute; */
-	/* position: relative;  */
+.internalCardId { /* position: absolute; */ /* position: relative;  */
 	/* box-shadow: 25px 20px 3px -7px grey; */
 	box-shadow: 14px 13px lightgrey, 0em 0 0.45em grey;
 	/* box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%); */
 	/* background-color: lightgrey; */
 }
-
 /* Photo gallery shadow */
 #galleriaId {
 	box-shadow: -24px -23px 3px -7px lightpink;
@@ -68,15 +57,6 @@
 	-main-bg-color: #{galleriaView.color
 }
 
-;
--first-page-color
-:
- 
-#{
-userWizard
-.whoAmIColor
-}
-;
 }
 .ui-galleria-content {
 	box-shadow: 30px 30px 35px 30px var(- -main-bg-color);
@@ -97,7 +77,6 @@ userWizard
 body .ui-galleria .ui-galleria-item-nav .ui-galleria-item-next-icon {
 	font-size: 5rem;
 }
-
 /* form panel border */
 body .ui-panel .ui-panel-content {
 	border: 0px;
@@ -127,48 +106,40 @@ body .ui-datatable thead th {
 	background: lightsteelblue;
 	color: black;
 }
-/*  Form Datatable Edit button press - background color of all column */
+/*  Form Datatable Edit button press - background color of all column */
 body .ui-datatable .ui-datatable-data>tr.ui-state-highlight {
 	background: linear-gradient(45deg, seagreen, transparent);
 }
-
-/* First tab, showing  */
+/* First tab, showing  */
 body .ui-button.ui-button-text-only .ui-button-text {
 	font-size: x-large;
 	color: black;
 }
-
 /* First tab, girl color */
-body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help>.ui-button {
+body .ui-button.ui-button-help, body .ui-splitbutton.ui-button-help>.ui-button
+	{
 	background: hotpink;
 }
-
 /* Personal page, Red Button - shifting upwards */
-body .ui-button.ui-button-danger, body .ui-splitbutton.ui-button-danger > .ui-button {
+body .ui-button.ui-button-danger, body .ui-splitbutton.ui-button-danger>.ui-button
+	{
 	margin-top: -1rem;
 }
-
 /* FamilyMember page, button text from black to white */
-body .ui-button.ui-button-text-only .ui-button-text{
+body .ui-button.ui-button-text-only .ui-button-text {
 	color: white;
 }
-
-/* /* tab highlight color */
-body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
-	{
-	background: var(- -first-page-color);
+/* First Page - message for profile visible to other Rajputs */
+body .ui-toggleswitch {
+	height: 1.15rem;
 }
-*
-/
+ 
 </style>
-
 		<h:form id="form">
 			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true">
 				<p:autoUpdate />
 			</p:growl>
-
 			<div class="grid">
-
 				<div class="col-12 md:col-4">
 					<div id="galleriaId">
 						<p:galleria value="#{galleriaView.photos}" var="photo"
@@ -190,27 +161,23 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
 					</p:fileUpload>
 					<p:growl id="messages" showDetail="true" keepAlive="true" />
-
 					<!-- <p:effect type="bounce" event="click" /> -->
 				</div>
-
-				<h:panelGroup rendered="#{!userWizard.whoAmIselected and !userWizard.guardianSelected and !userWizard.showForm}">
+				<h:panelGroup
+					rendered="#{!userWizard.whoAmIselected and !userWizard.guardianSelected and !userWizard.showForm}">
 					<div class="col-12 md:col-8">
 						<div class="card">
 							<p:growl id="growlForSelectionFirstId" sticky="true"
 								showDetail="true" />
 							<p:panel>
 								<p:messages />
-
 								<div class="col-12 md:col-12 wizardCardId">
 									<div class="card internalCardId"
 										style="background: radial-gradient(grey, transparent);">
-
 										<div class="ui-fluid formgrid grid">
 											<div class="field col-12 md:col-4">
 												<p:spacer width="5px" />
 											</div>
-											
 											<div class="field col-12 md:col-6">
 												<h:panelGrid columns="1">
 													<p:outputLabel id="profileForId"
@@ -226,8 +193,7 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														styleClass="rounded-button ui-button-help" />
 													<p:commandButton
 														actionListener="#{userWizard.whoAreYou('groom')}"
-														update="@form" value="Groom" styleClass="rounded-button" />
-									  				    <p:commandButton
+														update="@form" value="Groom" styleClass="rounded-button" />									  				    <p:commandButton
 														actionListener="#{userWizard.whoAreYou('admin')}"
 														update="@form" value="Admin"
 														styleClass="rounded-button ui-button-warning" />
@@ -240,31 +206,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 						</div>
 					</div>
 				</h:panelGroup>
-				
-				
-				<h:panelGroup rendered="#{userWizard.whoAmIselected and userWizard.guardianSelected and !userWizard.showForm}">
+
+				<h:panelGroup
+					rendered="#{userWizard.whoAmIselected and userWizard.guardianSelected and !userWizard.showForm}">
 					<div class="col-12 md:col-8">
 						<div class="card">
-							<p:growl id="growlForGuardianId" sticky="true"
-								showDetail="true" />
+							<p:growl id="growlForGuardianId" sticky="true" showDetail="true" />
 							<p:panel>
 								<p:messages />
-
-								<div class="ui-fluid formgrid grid col-12 md:col-12 wizardCardId">
+								<div
+									class="ui-fluid formgrid grid col-12 md:col-12 wizardCardId">
 									<div class="card internalCardId"
 										style="background: radial-gradient(lightgreen, transparent);">
-
 										<div class="ui-fluid formgrid grid col-12 md:col-12">
-											<div class="field col-12 md:col-3">
+											<div class="field col-12 md:col-2">
 												<p:spacer width="5px" />
 											</div>
-											<div class="ui-fluid formgrid grid col-12 md:col-5">
+											<div class="ui-fluid formgrid grid col-12 md:col-8">
 												<h:panelGrid columns="1">
 													<!-- Line 1 -->
-													<p:outputLabel  
-														style="font-size: x-large;">Who are you:</p:outputLabel>
+													<p:outputLabel style="font-size: x-large;">Who are you:</p:outputLabel>
 													<p:spacer width="5px" />
-													
 													<!-- Line 2 -->
 													<h:panelGrid columns="5">
 														<p:commandButton
@@ -272,30 +234,28 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 															update="@form" value="Guardian"
 															styleClass="ui-button-success col-12 md:col-2">
 														</p:commandButton>
-														
 														<p:spacer width="5px" />
-														
 														<h:panelGroup>
 															<div class="textAlignToCenter">
-																<!-- <p:outputLabel>Relationship</p:outputLabel>  -->
+																<!-- <p:outputLabel>Relationship</p:outputLabel>  -->
 																<div>
-																	<p:selectOneMenu immediate="true"   
-																					 value="#{userWizard.whoAreYouRelationship}"  
-																					 style="min-width:130px; border: outset;">
+																	<p:selectOneMenu immediate="true"
+																		value="#{userWizard.whoAreYouRelationship}"
+																		style="min-width:130px; border: outset;">
 																		<f:ajax render="@form" />
-																		
-																		<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																			noSelectionOption="true" />
-																		<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-																		<f:selectItem itemLabel="GrandParent" itemValue="Option 2" />
-																		<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																		<f:selectItem itemLabel="Select One"
+																			itemValue="#{null}" noSelectionOption="true" />
+																		<f:selectItem itemLabel="Option 1"
+																			itemValue="Option 1" />
+																		<f:selectItem itemLabel="GrandParent"
+																			itemValue="Option 2" />
+																		<f:selectItem itemLabel="Option 3"
+																			itemValue="Option 3" />
 																	</p:selectOneMenu>
 																</div>
 															</div>
 														</h:panelGroup>
-														
 														<p:spacer width="5px" />
-														
 														<p:commandButton
 															rendered="#{userWizard.whoAreYouRelationship ne null and userWizard.whoAreYouRelationship != ''}"
 															action="#{userWizard.whoAreYou('guardianNext')}"
@@ -303,6 +263,7 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														</p:commandButton>
 													</h:panelGrid>
 												</h:panelGrid>
+
 												<h:panelGrid columns="1">
 													<!-- Line 3 -->
 													<p:commandButton
@@ -310,32 +271,32 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														update="@form" value="Bride"
 														styleClass="rounded-button ui-button-help col-12 md:col-12">
 													</p:commandButton>
-													
 													<!-- Line 4 -->
 													<p:commandButton
 														actionListener="#{userWizard.whoAreYou('groom')}"
 														update="@form" value="Groom" styleClass="rounded-button">
 													</p:commandButton>
-													
-													<!-- Line 5 -->
-									  				<p:commandButton
+													<!-- Line 5 -->									  				<p:commandButton
 														actionListener="#{userWizard.whoAreYou('admin')}"
 														update="@form" value="Admin"
 														styleClass="rounded-button ui-button-warning">
 													</p:commandButton>
 												</h:panelGrid>
 											</div>
-											
-											<div class="field col-12 md:col-12">
+											<div id="panelMessageId" class="field col-12 md:col-12"
+												style="margin: 2rem;">
 												<p:spacer width="5px" />
-												<p:toggleSwitch	value="#{userWizard.divorsed}" onIcon="pi pi-check" offIcon="pi pi-times">
- 													 <p:ajax update="@form" listener="#{userWizard.divorsedListener}"/>
- 												</p:toggleSwitch>
- 												<p:spacer width="5px" />
- 												<p:outputLabel style="font-size: large;">I want this profile visible to Rajputs other than Rawa Rajput!</p:outputLabel>
+												<p:toggleSwitch id="toggleSwitchId"
+													value="#{userWizard.divorsed}" onIcon="pi pi-check"
+													offIcon="pi pi-times">
+													<p:ajax update="@form"
+														listener="#{userWizard.divorsedListener}" />
+												</p:toggleSwitch>
+												<p:spacer width="15px" />
+												<p:outputLabel id="outputPanelMessageId"
+													style="font-size: large;">I want this profile visible to Rajputs other than Rawa Rajput!</p:outputLabel>
 											</div>
-											
-											
+
 										</div>
 									</div>
 								</div>
@@ -344,29 +305,21 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 					</div>
 				</h:panelGroup>
 
-
 				<h:panelGroup rendered="#{userWizard.showForm}">
 					<div class="col-12 md:col-8">
 						<div class="card">
-
 							<p:growl id="growl" sticky="true" showDetail="true" />
-
 							<p:wizard flowListener="#{userWizard.onFlowProcess}">
-
 								<p:tab id="personal" title="Personal">
 									<p:panel>
 										<p:messages />
-
 										<div class="col-12 md:col-12 wizardCardId">
 											<div class="card internalCardId">
-
 												<!-- Line 1 -->
-
 
 												<!-- Line 2 -->
 												<div class="ui-fluid formgrid grid" id="inlineId">
 													<div class="formgroup-inline field">
-
 														<p:outputLabel for="name3"
 															styleClass="col-12 mb-2 md:col-2 mb-md-0">
 															<div style="padding-top: 1px;">
@@ -375,15 +328,14 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																	severity="warning"></p:badge>
 															</div>
 														</p:outputLabel>
-
-														<div class="md:col-4" id="firstNamePersonalId" style="margin-left: -1rem;" >
+														<div class="md:col-4" id="firstNamePersonalId"
+															style="margin-left: -1rem;">
 															<div class="ui-inputgroup ui-float-label">
 																<p:inputText id="name3" type="text" />
 																<p:outputLabel for="@previous" value="First Name" />
 																<div class="ui-inputgroup-addon">
 																	<i class="pi pi-user"></i>
 																</div>
-
 															</div>
 														</div>
 														<div class="md:col-4">
@@ -404,7 +356,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														</div>
 													</div>
 												</div>
-
 												<!-- Line 3 -->
 												<div class="ui-fluid formgrid grid" id="inlineId">
 													<div class="field col-12 md:col-3 textAlignToCenter">
@@ -414,7 +365,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																placeholder="Date of Birth" value="#{userWizard.date2}"
 																monthNavigator="true" yearNavigator="true"
 																showWeek="true">
-
 																<p:ajax event="dateSelect"
 																	listener="#{userWizard.onDateSelect}" update="msgs" />
 															</p:datePicker>
@@ -455,12 +405,11 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														</div>
 													</div>
 												</div>
-
 												<p:spacer height="1px" />
 												<h5>Address</h5>
 												<div class="field ui-fluid">
 													<p:inputText id="addressLine1Id"
-														placeholder="Address Line 1,  include landmark" />
+														placeholder="Address Line 1,  include landmark" />
 												</div>
 												<div class="ui-fluid formgrid grid">
 													<div class="field col-12 md:col-3">
@@ -472,13 +421,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 													<div class="field col-12 md:col-3">
 														<p:outputLabel for="stateId">State</p:outputLabel>
 														<div>
-															<p:selectOneMenu id="stateId">
+															<p:selectOneMenu id="stateId" value="#{userWizard.state}"
+																rendered="#{userWizard.state != 'Others'}">
+																<p:ajax event="itemSelect" update="@form" />
 																<f:selectItem itemLabel="Select One" itemValue="#{null}"
 																	noSelectionOption="true" />
 																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
 																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
 																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																<f:selectItem itemLabel="Others" itemValue="Others" />
 															</p:selectOneMenu>
+														</div>
+														<div>
+															<h:panelGrid columns="2"
+																rendered="#{userWizard.state == 'Others'}">
+																<p:inputText value="#{userWizard.state}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('state')}"
+																	update="@form" styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
 														</div>
 													</div>
 													<div class="field col-12 md:col-3">
@@ -490,13 +453,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 													<div class="field col-12 md:col-3">
 														<p:outputLabel for="countryId">Country</p:outputLabel>
 														<div>
-															<p:selectOneMenu id="countryId">
+															<p:selectOneMenu id="countryId"
+																value="#{userWizard.country}"
+																rendered="#{userWizard.country != 'Others'}">
+																<p:ajax event="itemSelect" update="@form" />
 																<f:selectItem itemLabel="Select One" itemValue="#{null}"
 																	noSelectionOption="true" />
 																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
 																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
 																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																<f:selectItem itemLabel="Others" itemValue="Others" />
 															</p:selectOneMenu>
+														</div>
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.country == 'Others'}">
+																<p:inputText value="#{userWizard.country}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('country')}"
+																	update="@form" styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
 														</div>
 													</div>
 												</div>
@@ -504,16 +481,13 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 										</div>
 									</p:panel>
 								</p:tab>
-								
-								
+
 
 								<p:tab id="moreInformationId" title="More information">
 									<p:panel>
 										<p:messages />
-
 										<div class="col-12 md:col-12 wizardCardId">
 											<div class="card internalCardId">
-
 												<div class="ui-fluid formgrid grid">
 													<div class="field col-12 md:col-3">
 														<p:outputLabel for="educationId">Education(Highest)</p:outputLabel>
@@ -534,102 +508,39 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 														</div>
 													</div>
 													<div class="field col-12 md:col-3">
-														<p:outputLabel for="languageId">Languages Known</p:outputLabel>
-														<p:selectOneMenu id="languageId">
-															<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																noSelectionOption="true" />
-															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-														</p:selectOneMenu>
-													</div>
-												</div>
-
-
-												<div class="ui-fluid formgrid grid">
-													<div class="field col-12 md:col-3">
-														<p:outputLabel for="employmentId">Employment</p:outputLabel>
-														<div>
-															<p:selectOneMenu id="employmentId">
-																<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																	noSelectionOption="true" />
-																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-															</p:selectOneMenu>
-														</div>
+														<p:outputLabel id="isDivorsedId" style="color:red;">Divorcee?</p:outputLabel>
+														<p:spacer width="13px" />
+														<p:outputLabel id="isWidowerId" style="color:green;">Widowed?</p:outputLabel>
+														<br />
+														<p:toggleSwitch value="#{userWizard.divorsed}"
+															onIcon="pi pi-check" offIcon="pi pi-times">
+															<p:ajax update="@form"
+																listener="#{userWizard.divorsedListener}" />
+														</p:toggleSwitch>
+														<p:spacer width="15px" />
+														<p:toggleSwitch value="#{userWizard.widow}"
+															onIcon="pi pi-check" offIcon="pi pi-times">
+															<p:ajax update="@form"
+																listener="#{userWizard.widowListener}" />
+														</p:toggleSwitch>
 													</div>
 													<div class="field col-12 md:col-3">
-														<p:outputLabel for="salaryId">Salary(Approx)</p:outputLabel>
-														<div>
-															<p:selectOneMenu id="salaryId">
-																<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																	noSelectionOption="true" />
-																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-															</p:selectOneMenu>
-														</div>
-													</div>
-													<div class="field col-12 md:col-3">
-														<p:outputLabel for="workExId">Work Experience</p:outputLabel>
-														<p:selectOneMenu id="workExId">
-															<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																noSelectionOption="true" />
-															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-														</p:selectOneMenu>
-													</div>
-													<div class="field col-12 md:col-3">
-														<p:outputLabel for="birthId">Place of Birth</p:outputLabel>
-														<p:selectOneMenu id="birthId">
-															<f:selectItem itemLabel="Select One" itemValue="#{null}"
-																noSelectionOption="true" />
-															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
-															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
-															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
-														</p:selectOneMenu>
-													</div>
-												</div>
-												
-												<div class="ui-fluid formgrid grid">
-													<div class="field col-12 md:col-2" />
-													
-													<div class="field col-12 md:col-4">
-														 <p:outputLabel id="isDivorsedId" style="color:red;">Divorcee?</p:outputLabel>
-														 <p:spacer width="25px"/>
-														  <p:outputLabel id="isWidowerId" style="color:green;">Widowed?</p:outputLabel>
-														 <br/>
-       													 <p:toggleSwitch value="#{userWizard.divorsed}" onIcon="pi pi-check" offIcon="pi pi-times" >
-       													 	<p:ajax update="@form" listener="#{userWizard.divorsedListener}"/>
-       													 </p:toggleSwitch>
-       													  <p:spacer width="45px"/>
-       													 <p:toggleSwitch value="#{userWizard.widow}" onIcon="pi pi-check" offIcon="pi pi-times" >
-       													 	<p:ajax update="@form" listener="#{userWizard.widowListener}"/>
-       													 </p:toggleSwitch>
-														
-													</div>
-													
-													<div class="field col-12 md:col-3">
-														 <h:panelGroup rendered="#{userWizard.divorsed}">
-															 <p:outputLabel style="color:red;">Date of Divorce</p:outputLabel>
-															 <p:datePicker  numberOfMonths="1"
-																placeholder="Date of Divorce" value="#{userWizard.divorceDate}"
-																monthNavigator="true" yearNavigator="true"
-																showWeek="true">
-	
+														<h:panelGroup rendered="#{userWizard.divorsed}">
+															<p:outputLabel style="color:red;">Date of Divorce</p:outputLabel>
+															<p:datePicker numberOfMonths="1"
+																placeholder="Date of Divorce"
+																value="#{userWizard.divorceDate}" monthNavigator="true"
+																yearNavigator="true" showWeek="true">
 																<p:ajax event="dateSelect"
 																	listener="#{userWizard.onDateSelect}" update="msgs" />
 															</p:datePicker>
 														</h:panelGroup>
 														<h:panelGroup rendered="#{userWizard.widow}">
-															 <p:outputLabel style="color:green;">Date of Widow</p:outputLabel>
-															 <p:datePicker  numberOfMonths="1"
-																placeholder="Date of Widow" value="#{userWizard.widowDate}"
-																monthNavigator="true" yearNavigator="true"
-																showWeek="true">
-	
+															<p:outputLabel style="color:green;">Date of Widow</p:outputLabel>
+															<p:datePicker numberOfMonths="1"
+																placeholder="Date of Widow"
+																value="#{userWizard.widowDate}" monthNavigator="true"
+																yearNavigator="true" showWeek="true">
 																<p:ajax event="dateSelect"
 																	listener="#{userWizard.onDateSelect}" update="msgs" />
 															</p:datePicker>
@@ -637,6 +548,183 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 													</div>
 												</div>
 
+												<div class="ui-fluid formgrid grid">
+													<div class="field col-12 md:col-3">
+														<p:outputLabel for="employmentId">Employment</p:outputLabel>
+														<div>
+															<p:selectOneMenu id="employmentId" value="#{userWizard.employment}"
+																rendered="#{userWizard.employment != 'Others'}">
+																<p:ajax event="itemSelect" update="@form"/>
+																<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																	noSelectionOption="true" />
+																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																<f:selectItem itemLabel="Others" itemValue="Others" />
+															</p:selectOneMenu>
+														</div>
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.employment == 'Others'}">
+																<p:inputText value="#{userWizard.employment}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('employment')}"
+																	update="@form"
+																	styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
+														</div>
+													</div>
+													<div class="field col-12 md:col-3">
+														<p:outputLabel for="salaryId">Salary(Approx)</p:outputLabel>
+														<div>
+															<p:selectOneMenu id="salaryId"
+																value="#{userWizard.salary}" rendered="#{userWizard.salary != 'Others'}">
+																<p:ajax event="itemSelect" update="@form"/>
+																<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																	noSelectionOption="true" />
+																<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																<f:selectItem itemLabel="Others" itemValue="Others" />
+															</p:selectOneMenu>
+														</div>
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.salary == 'Others'}">
+																<p:inputText value="#{userWizard.salary}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('salary')}"
+																	update="@form"
+																	styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
+														</div>
+													</div>
+													<div class="field col-12 md:col-3">
+														<p:outputLabel for="workExId">Work Experience</p:outputLabel>
+														<p:selectOneMenu id="workExId"
+															value="#{userWizard.workEx}"
+															rendered="#{userWizard.workEx != 'Others'}">
+															<p:ajax event="itemSelect" update="@form"/>
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+															<f:selectItem itemLabel="Others" itemValue="Others" />
+														</p:selectOneMenu>
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.workEx == 'Others'}">
+																<p:inputText value="#{userWizard.workEx}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('workEx')}"
+																	update="@form" styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
+														</div>
+													</div>
+													<div class="field col-12 md:col-3">
+														<p:outputLabel for="birthId">Place of Birth</p:outputLabel>
+														<p:selectOneMenu id="birthId"
+															rendered="#{userWizard.placeOfBirth != 'Others'}"
+															value="#{userWizard.placeOfBirth}">
+															<p:ajax event="itemSelect" update="@form"/>
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+															<f:selectItem itemLabel="Others" itemValue="Others" />
+														</p:selectOneMenu>
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.placeOfBirth == 'Others'}">
+																<p:inputText value="#{userWizard.placeOfBirth}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('placeOfBirth')}"
+																	update="@form" styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
+														</div>
+													</div>
+												</div>
+												<div class="ui-fluid formgrid grid">
+													<div class="field col-12 md:col-3">
+														<p:outputLabel for="languageId">Languages Known</p:outputLabel>
+														<p:selectOneMenu id="languageId"
+															rendered="#{userWizard.languages != 'Others'}"
+															value="#{userWizard.languages}">
+															<p:ajax event="itemSelect" update="@form"/>
+															<f:selectItem itemLabel="Select One" itemValue="#{null}"
+																noSelectionOption="true" />
+															<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+															<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+															<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+															<f:selectItem itemLabel="Others" itemValue="Others" />
+														</p:selectOneMenu>
+
+														<div>
+															<h:panelGrid columns="2" rendered="#{userWizard.languages == 'Others'}">
+																<p:inputText value="#{userWizard.languages}"
+																	placeholder="Others" />
+																<p:commandButton icon="pi pi-times"
+																	actionListener="#{userWizard.resetDropDown('languages')}"
+																	update="@form" styleClass="ui-button-info">
+																</p:commandButton>
+															</h:panelGrid>
+														</div>
+													</div>
+													<div class="field col-12 md:col-4">
+														<h:panelGrid columns="2">
+															<h:panelGroup>
+																<p:outputLabel style="color: blue">Total Brothers</p:outputLabel>
+																<p:selectOneMenu>
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</h:panelGroup>
+															<h:panelGroup>
+																<p:outputLabel style="color: blue">Total Married</p:outputLabel>
+																<p:selectOneMenu>
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</h:panelGroup>
+														</h:panelGrid>
+													</div>
+													<div class="field col-12 md:col-5">
+														<h:panelGrid columns="2">
+															<h:panelGroup>
+																<p:outputLabel>Total Sisters</p:outputLabel>
+																<p:selectOneMenu>
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</h:panelGroup>
+															<h:panelGroup>
+																<p:outputLabel>Total Married</p:outputLabel>
+																<p:selectOneMenu>
+																	<f:selectItem itemLabel="Select One"
+																		itemValue="#{null}" noSelectionOption="true" />
+																	<f:selectItem itemLabel="Option 1" itemValue="Option 1" />
+																	<f:selectItem itemLabel="Option 2" itemValue="Option 2" />
+																	<f:selectItem itemLabel="Option 3" itemValue="Option 3" />
+																</p:selectOneMenu>
+															</h:panelGroup>
+														</h:panelGrid>
+													</div>
+												</div>
 												<h5>About me, and looking for:</h5>
 												<div class="field ui-fluid">
 													<p:inputTextarea id="aboutMeId"
@@ -647,15 +735,12 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 										</div>
 									</p:panel>
 								</p:tab>
-
 								<p:tab id="familyMemberId" title="Family Member">
 									<p:panel>
 										<!-- <p:messages /> -->
-
 										<div class="ui-fluid formgrid grid">
 											<div class="col-12 md:col-12 wizardCardId">
 												<div class="card internalCardId">
-
 													<h:panelGrid columns="3">
 														<h:panelGrid columns="1" styleClass="col-12 md:col-12">
 															<p:outputLabel for="personToAddId">Person to Add</p:outputLabel>
@@ -677,9 +762,7 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																	id="otherId" />
 															</p:selectOneMenu>
 														</h:panelGrid>
-
 														<p:spacer width="10px"></p:spacer>
-
 														<h:panelGroup>
 															<p:dataTable value="#{userWizard.familyMemberList}"
 																var="book" rowHover="true" stickyHeader="true"
@@ -689,13 +772,11 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																clientCache="false" scrollRows="3" cellEditMode="eager"
 																liveResize="true" id="datatableForParentsId"
 																editable="true" style="margin-bottom:20px">
-
 																<p:ajax event="rowEdit"
 																	listener="#{userWizard.onRowEdit}" update=":form:msgs" />
 																<p:ajax event="rowEditCancel"
 																	listener="#{userWizard.onRowCancel}"
 																	update=":form:msgs" />
-
 																<p:column headerText="Person" style="width:3rem;"
 																	class="ui-column-title">
 																	<p:cellEditor>
@@ -708,7 +789,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																		</f:facet>
 																	</p:cellEditor>
 																</p:column>
-
 																<p:column headerText="Full Name" style="width:7rem;"
 																	class="ui-column-title">
 																	<p:cellEditor>
@@ -721,7 +801,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																		</f:facet>
 																	</p:cellEditor>
 																</p:column>
-
 																<p:column headerText="Village" style="width:5rem">
 																	<p:cellEditor>
 																		<f:facet name="output">
@@ -733,7 +812,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																		</f:facet>
 																	</p:cellEditor>
 																</p:column>
-
 																<p:column headerText="Gotra" style="width:4rem">
 																	<p:cellEditor>
 																		<f:facet name="output">
@@ -745,14 +823,11 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																		</f:facet>
 																	</p:cellEditor>
 																</p:column>
-
 																<p:column style="width:2rem" headerText="Edit">
 																	<p:rowEditor editTitle="Edit Row"
 																		cancelTitle="Cancel Edit" saveTitle="Save Row">
-
 																	</p:rowEditor>
 																</p:column>
-
 																<p:column style="width:3rem" headerText="Delete">
 																	<p:commandLink update="@form"
 																		actionListener="#{userWizard.deleteFamilyMember(book.type, book.fullName ) }">
@@ -761,36 +836,35 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																	</p:commandLink>
 																</p:column>
 
-
 															</p:dataTable>
 														</h:panelGroup>
 													</h:panelGrid>
 
-
-													<br />
-													<p:divider rendered="#{userWizard.personToAdd ne null }" align="left">
+													<!-- <br /> -->
+													<p:divider rendered="#{userWizard.personToAdd ne null }"
+														align="left">
 														<div class="inline-flex align-items-center">
 															<i class="pi pi-user mr-2" /> <b>Fill Below
 																Information</b>
 														</div>
 													</p:divider>
-
 													<div id="selectFamilyMemberId"
 														class="field col-12 md:col-12">
-
 														<div class="ui-fluid formgrid grid">
 															<h:panelGroup
 																rendered="#{userWizard.personToAdd == 'Father'}">
-																<div class="field col-12 md:col-4">
+																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="nameformId">Father Name</p:outputLabel>
 																	<div>
 																		<p:inputText id="nameformId" placeholder="Name" />
 																	</div>
 																</div>
-																<div class="field col-12 md:col-2">
+																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="fatherGothraId">Father Gotra</p:outputLabel>
 																	<div>
-																		<p:selectOneMenu id="fatherGothraId">
+																		<p:selectOneMenu id="fatherGothraId" 
+																						 value="#{userWizard.fatherGothra}" rendered="#{userWizard.fatherGothra != 'Others'}">
+																			<p:ajax event="itemSelect" update="@form"/>
 																			<f:selectItem itemLabel="Select One"
 																				itemValue="#{null}" noSelectionOption="true" />
 																			<f:selectItem itemLabel="Option 1"
@@ -799,12 +873,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																				itemValue="Option 2" />
 																			<f:selectItem itemLabel="Option 3"
 																				itemValue="Option 3" />
+																			<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																		</p:selectOneMenu>
+																	</div>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.fatherGothra == 'Others'}">
+																			<p:inputText value="#{userWizard.fatherGothra}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('fatherGothra')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
 																	</div>
 																</div>
 																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="villageFormId">Father Village</p:outputLabel>
-																	<p:selectOneMenu id="villageFormId">
+																	<p:selectOneMenu id="villageFormId" rendered="#{userWizard.fatherVillage != 'Others'}"
+																					 value="#{userWizard.fatherVillage}">
+																		<p:ajax event="itemSelect" update="@form"/>
 																		<f:selectItem itemLabel="Select One"
 																			itemValue="#{null}" noSelectionOption="true" />
 																		<f:selectItem itemLabel="Option 1"
@@ -813,17 +902,29 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																			itemValue="Option 2" />
 																		<f:selectItem itemLabel="Option 3"
 																			itemValue="Option 3" />
+																		<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																	</p:selectOneMenu>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.fatherVillage == 'Others'}">
+																			<p:inputText value="#{userWizard.fatherVillage}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('fatherVillage')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
+																	</div>
 																</div>
 																<div class="field col-12 md:col-3 ui-inputgroup">
 																	<p:commandButton styleClass="rounded-button"
-																		style="color: white;"
-																		value="Save Father" update="@form"
+																		style="color: white;" value="Save Father"
+																		update="@form"
 																		actionListener="#{userWizard.saveFamilyMember('Father')}" />
 																</div>
 															</h:panelGroup>
 														</div>
-
 
 														<div class="ui-fluid formgrid grid">
 															<h:panelGroup
@@ -837,7 +938,9 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="motherGothraId">Mother Gotra</p:outputLabel>
 																	<div>
-																		<p:selectOneMenu id="motherGothraId">
+																		<p:selectOneMenu id="motherGothraId"
+																						 value="#{userWizard.motherGothra}" rendered="#{userWizard.motherGothra != 'Others'}">
+																			<p:ajax event="itemSelect" update="@form"/>
 																			<f:selectItem itemLabel="Select One"
 																				itemValue="#{null}" noSelectionOption="true" />
 																			<f:selectItem itemLabel="Option 1"
@@ -846,12 +949,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																				itemValue="Option 2" />
 																			<f:selectItem itemLabel="Option 3"
 																				itemValue="Option 3" />
+																			<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																		</p:selectOneMenu>
+																	</div>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.motherGothra == 'Others'}">
+																			<p:inputText value="#{userWizard.fatherVillage}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('motherGothra')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
 																	</div>
 																</div>
 																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="mothervillageFormId">Mother Village</p:outputLabel>
-																	<p:selectOneMenu id="mothervillageFormId">
+																	<p:selectOneMenu id="mothervillageFormId"
+																				     value="#{userWizard.motherVillage}" rendered="#{userWizard.motherVillage != 'Others'}">
+																		<p:ajax event="itemSelect" update="@form"/>
 																		<f:selectItem itemLabel="Select One"
 																			itemValue="#{null}" noSelectionOption="true" />
 																		<f:selectItem itemLabel="Option 1"
@@ -860,7 +978,20 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																			itemValue="Option 2" />
 																		<f:selectItem itemLabel="Option 3"
 																			itemValue="Option 3" />
+																		<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																	</p:selectOneMenu>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.motherVillage == 'Others'}">
+																			<p:inputText value="#{userWizard.motherVillage}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('motherVillage')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
+																	</div>
 																</div>
 																<div class="field col-12 md:col-3 ui-inputgroup">
 																	<p:commandButton styleClass="rounded-button"
@@ -869,8 +1000,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																</div>
 															</h:panelGroup>
 														</div>
-
-
 														<div class="ui-fluid formgrid grid">
 															<h:panelGroup
 																rendered="#{userWizard.personToAdd == 'Brother'}">
@@ -892,7 +1021,6 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																</div>
 															</h:panelGroup>
 														</div>
-
 														<div class="ui-fluid formgrid grid">
 															<h:panelGroup
 																rendered="#{userWizard.personToAdd == 'Sister'}">
@@ -902,13 +1030,11 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																		<p:inputText id="sisterNameformId" placeholder="Name" />
 																	</div>
 																</div>
-
 																<div class="field col-12 md:col-2"
 																	style="padding-top: 2rem;">
 																	<p:selectBooleanCheckbox id="sisterMarriedformId"
 																		itemLabel="Married" />
 																</div>
-
 																<div class="field col-12 md:col-3 ui-inputgroup">
 																	<p:commandButton styleClass="rounded-button"
 																		value="Save Sister" update="@form"
@@ -916,20 +1042,21 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																</div>
 															</h:panelGroup>
 														</div>
-														
 														<div class="ui-fluid formgrid grid">
 															<h:panelGroup
 																rendered="#{userWizard.personToAdd == 'Other'}">
-																<div class="field col-12 md:col-4">
+																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="otherformId">Others Name</p:outputLabel>
 																	<div>
 																		<p:inputText id="otherformId" placeholder="Name" />
 																	</div>
 																</div>
-																<div class="field col-12 md:col-2">
+																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="otherGothraId">Other Gotra</p:outputLabel>
 																	<div>
-																		<p:selectOneMenu id="otherGothraId">
+																		<p:selectOneMenu id="otherGothraId"
+																						 value="#{userWizard.otherGothra}" rendered="#{userWizard.otherGothra != 'Others'}">
+																			<p:ajax event="itemSelect" update="@form"/>
 																			<f:selectItem itemLabel="Select One"
 																				itemValue="#{null}" noSelectionOption="true" />
 																			<f:selectItem itemLabel="Option 1"
@@ -938,12 +1065,27 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																				itemValue="Option 2" />
 																			<f:selectItem itemLabel="Option 3"
 																				itemValue="Option 3" />
+																			<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																		</p:selectOneMenu>
+																	</div>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.otherGothra == 'Others'}">
+																			<p:inputText value="#{userWizard.otherGothra}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('otherGothra')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
 																	</div>
 																</div>
 																<div class="field col-12 md:col-3">
 																	<p:outputLabel for="villageOtherFormId">Other Village</p:outputLabel>
-																	<p:selectOneMenu id="villageOtherFormId">
+																	<p:selectOneMenu id="villageOtherFormId"
+																					 value="#{userWizard.otherVillage}" rendered="#{userWizard.otherVillage != 'Others'}">
+																		<p:ajax event="itemSelect" update="@form"/>
 																		<f:selectItem itemLabel="Select One"
 																			itemValue="#{null}" noSelectionOption="true" />
 																		<f:selectItem itemLabel="Option 1"
@@ -952,29 +1094,38 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 																			itemValue="Option 2" />
 																		<f:selectItem itemLabel="Option 3"
 																			itemValue="Option 3" />
+																		<f:selectItem itemLabel="Others"
+																				itemValue="Others" />
 																	</p:selectOneMenu>
+																	
+																	<div>
+																		<h:panelGrid columns="2" rendered="#{userWizard.otherVillage == 'Others'}">
+																			<p:inputText value="#{userWizard.otherVillage}"
+																				placeholder="Others" />
+																			<p:commandButton icon="pi pi-times"
+																				actionListener="#{userWizard.resetDropDown('otherVillage')}"
+																				update="@form" styleClass="ui-button-info">
+																			</p:commandButton>
+																		</h:panelGrid>
+																	</div>
 																</div>
 																<div class="field col-12 md:col-3 ui-inputgroup">
 																	<p:commandButton styleClass="rounded-button"
-																		style="color: white;"
-																		value="Save other" update="@form"
+																		style="color: white;" value="Save other"
+																		update="@form"
 																		actionListener="#{userWizard.saveFamilyMember('Other')}" />
 																</div>
 															</h:panelGroup>
 														</div>
 														 
 													</div>
-
 												</div>
 											</div>
 										</div>
 
-
 										<br />
-
 									</p:panel>
 								</p:tab>
-
 								<p:tab id="confirm" title="Confirmation">
 									<p:panel header="Confirmation">
 										<h:panelGrid id="confirmation" columns="3"
@@ -983,65 +1134,49 @@ body .ui-wizard .ui-wizard-step-titles .ui-wizard-step-title.ui-state-highlight
 												<h:outputText value="Firstname: " />
 												<h:outputText value="#{userWizard.user.firstname}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="Lastname: " />
 												<h:outputText value="#{userWizard.user.lastname}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="Age: " />
 												<h:outputText value="#{userWizard.user.age}"
 													styleClass="outputLabel" />
 											</h:panelGrid>
-
 											<h:panelGrid columns="2" columnClasses="label, value">
 												<h:outputText value="Street: " />
 												<h:outputText value="#{userWizard.user.street}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="Postal: " />
 												<h:outputText value="#{userWizard.user.postalCode}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="City: " />
 												<h:outputText value="#{userWizard.user.city}"
 													styleClass="outputLabel" />
 											</h:panelGrid>
-
 											<h:panelGrid columns="2" columnClasses="label, value">
 												<h:outputText value="Email: " />
 												<h:outputText value="#{userWizard.user.email}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="Phone " />
 												<h:outputText value="#{userWizard.user.phone}"
 													styleClass="outputLabel" />
-
 												<h:outputText value="Info: " />
 												<h:outputText value="#{userWizard.user.info}"
 													styleClass="outputLabel" />
-
 												<h:outputText />
 												<h:outputText />
 											</h:panelGrid>
 										</h:panelGrid>
-
 										<p:commandButton value="Submit" action="#{userWizard.save}"
 											update="growl" process="@form" />
-
 									</p:panel>
 								</p:tab>
 								<p:button id="dfdfsf" />
 							</p:wizard>
 
-
 						</div>
 					</div>
 				</h:panelGroup>
-
 			</div>
-
 		</h:form>
-
 	</ui:define>
-
 </ui:composition>

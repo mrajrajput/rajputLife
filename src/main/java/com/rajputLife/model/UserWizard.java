@@ -138,6 +138,22 @@ public class UserWizard implements Serializable {
 
 		System.out.println("New value: " + event.getObject());
 	}
+	
+	public String country;
+	public String state;
+	
+	
+//	public void selectCountryListener(SelectEvent<?> event) {
+//		FamilyMember familyMember = new FamilyMember();
+//		familyMember.setType((String) event.getObject());
+//		personToAdd = (String) event.getObject();
+//
+//		// familyMember.setType((String) event.getNewValue());
+//		// personToAdd =  (String) event.getNewValue();
+//		// System.out.println("New value: " + event.getNewValue());
+//
+//		System.out.println("New value: " + event.getObject());
+//	}
 
 	public void saveFamilyMember(Object type) {
 		System.out.println("Saving father");
@@ -220,6 +236,64 @@ public class UserWizard implements Serializable {
 				whoAmIselected = false;
 				guardianSelected = false;
 				showForm = false;
+			default:
+				System.out.println("none of the above");
+		}
+	}
+	
+	public String employment;
+	public String salary;
+	public String workEx;
+	public String languages;
+	public String placeOfBirth;
+	public String fatherGothra;
+	public String fatherVillage;
+	public String motherGothra;
+	public String motherVillage;
+	public String otherGothra;
+	public String otherVillage;
+	
+	public void resetDropDown(Object resetDropDown) {
+		switch ((String) resetDropDown) {
+			case "country":
+				country = null;
+				break;
+			case "state":
+				state = null;
+				break;
+			case "employment":
+				employment = null;
+				break;
+			case "salary":
+				salary = null;
+				break;
+			case "workEx":
+				workEx = null;
+				break;
+			case "languages":
+				languages = null;
+				break;
+			case "placeOfBirth":
+				placeOfBirth = null;
+				break;
+			case "fatherGothra":
+				fatherGothra = null;
+				break;
+			case "fatherVillage":
+				fatherVillage = null;
+				break;
+			case "motherGothra":
+				motherGothra = null;
+				break;
+			case "motherVillage":
+				motherVillage = null;
+				break;
+			case "otherGothra":
+				otherGothra = null;
+				break;
+			case "otherVillage":
+				otherVillage = null;
+				break;
 			default:
 				System.out.println("none of the above");
 		}
@@ -386,5 +460,109 @@ public class UserWizard implements Serializable {
 
 	public void setWhoAreYouRelationship(String whoAreYouRelationship) {
 		this.whoAreYouRelationship = whoAreYouRelationship;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getEmployment() {
+		return employment;
+	}
+
+	public void setEmployment(String employment) {
+		this.employment = employment;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public String getWorkEx() {
+		return workEx;
+	}
+
+	public void setWorkEx(String workEx) {
+		this.workEx = workEx;
+	}
+
+	public String getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(String languages) {
+		this.languages = languages;
+	}
+
+	public String getPlaceOfBirth() {
+		return placeOfBirth;
+	}
+
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth = placeOfBirth;
+	}
+
+	public String getFatherGothra() {
+		return fatherGothra;
+	}
+
+	public void setFatherGothra(String fatherGothra) {
+		this.fatherGothra = fatherGothra;
+	}
+
+	public String getFatherVillage() {
+		return fatherVillage;
+	}
+
+	public void setFatherVillage(String fatherVillage) {
+		this.fatherVillage = fatherVillage;
+	}
+
+	public String getMotherGothra() {
+		return motherGothra;
+	}
+
+	public void setMotherGothra(String motherGothra) {
+		this.motherGothra = motherGothra;
+	}
+
+	public String getMotherVillage() {
+		return motherVillage;
+	}
+
+	public void setMotherVillage(String motherVillage) {
+		this.motherVillage = motherVillage;
+	}
+
+	public String getOtherGothra() {
+		return otherGothra;
+	}
+
+	public void setOtherGothra(String otherGothra) {
+		this.otherGothra = otherGothra;
+	}
+
+	public String getOtherVillage() {
+		return otherVillage;
+	}
+
+	public void setOtherVillage(String otherVillage) {
+		this.otherVillage = otherVillage;
 	}
 }
