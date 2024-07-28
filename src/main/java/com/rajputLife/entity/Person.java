@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "Person")
@@ -68,107 +68,13 @@ public class Person {
 	@Column(name="workExperience", nullable = true)
 	public String workExperience;
 
+
+
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Profile profile;
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FamilyMember> familyMembers = new ArrayList<>();
-	
-	
-	public int getPkPersonId() {
-		return pkPersonId;
-	}
-	public void setPkPersonId(int pkPersonId) {
-		this.pkPersonId = pkPersonId;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getDob() {
-		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	public String getTimeOfBirth() {
-		return timeOfBirth;
-	}
-	public void setTimeOfBirth(String timeOfBirth) {
-		this.timeOfBirth = timeOfBirth;
-	}
-	public String getPlaceOfBirth() {
-		return placeOfBirth;
-	}
-	public void setPlaceOfBirth(String placeOfBirth) {
-		this.placeOfBirth = placeOfBirth;
-	}
-	public boolean isManglik() {
-		return isManglik;
-	}
-	public void setManglik(boolean isManglik) {
-		this.isManglik = isManglik;
-	}
-	public String getHeight() {
-		return height;
-	}
-	public void setHeight(String height) {
-		this.height = height;
-	}
-	public String getWeight() {
-		return weight;
-	}
-	public void setWeight(String weight) {
-		this.weight = weight;
-	}
-	public String getComplexion() {
-		return complexion;
-	}
-	public void setComplexion(String complexion) {
-		this.complexion = complexion;
-	}
-	public String getHighestEducation() {
-		return highestEducation;
-	}
-	public void setHighestEducation(String highestEducation) {
-		this.highestEducation = highestEducation;
-	}
-	public int getWhatYearDegreeReceived() {
-		return whatYearDegreeReceived;
-	}
-	public void setWhatYearDegreeReceived(int whatYearDegreeReceived) {
-		this.whatYearDegreeReceived = whatYearDegreeReceived;
-	}
-	public String getLanguagesKnown() {
-		return languagesKnown;
-	}
-	public void setLanguagesKnown(String languagesKnown) {
-		this.languagesKnown = languagesKnown;
-	}
-	public String getEmploymentType() {
-		return employmentType;
-	}
-	public void setEmploymentType(String employmentType) {
-		this.employmentType = employmentType;
-	}
-	public String getSalaryOrApproxIncome() {
-		return salaryOrApproxIncome;
-	}
-	public void setSalaryOrApproxIncome(String salaryOrApproxIncome) {
-		this.salaryOrApproxIncome = salaryOrApproxIncome;
-	}
-	public String getWorkExperience() {
-		return workExperience;
-	}
-	public void setWorkExperience(String workExperience) {
-		this.workExperience = workExperience;
-	}
+
+
 }

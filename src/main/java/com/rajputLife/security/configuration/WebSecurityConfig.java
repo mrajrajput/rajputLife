@@ -104,7 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//Both below works!! :)
 				//.defaultSuccessUrl("/product/product-list.jsf")
 
-				//.defaultSuccessUrl("/product/product-list.jsf") //for login page use login.xhtml file path.
+//				.defaultSuccessUrl("/product/product-list.jsf") //for login page use login.xhtml file path.
 				.defaultSuccessUrl("/registered/product-list-forRegisteredUser.jsf") //for login page use login.xhtml file path.
 
 				.failureUrl("/security/customLogin.jsf")
