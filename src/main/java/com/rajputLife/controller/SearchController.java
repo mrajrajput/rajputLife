@@ -1,4 +1,4 @@
-package com.rajputLife.model;
+package com.rajputLife.controller;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,31 +7,83 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
+import javax.servlet.http.HttpServletRequest;
 
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.annotation.Parameter;
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.ocpsoft.rewrite.faces.annotation.Deferred;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.rajputLife.entity.FamilyMember;
+import com.rajputLife.model.Product;
+import com.rajputLife.model.User;
 
 @Scope(value = "session")
-@Component(value = "userWizard")
-@ELBeanName(value = "userWizard")
-public class UserWizard implements Serializable {
+@Component(value = "searchController")
+@ELBeanName(value = "searchController")
+//http://localhost:8080/single?value=2 will work
+//http://localhost:8080/profile?id=2 
+@Join(path = "/search", to = "/search.jsf")
+public class SearchController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	
+	private List<SelectItem> countries;
+    private String[] selectedCountries;
+
+    @PostConstruct
+    public void init() {
+        countries = new ArrayList<>();
+        SelectItemGroup science = new SelectItemGroup("Science");
+        science.setSelectItems(new SelectItem[]{
+            new SelectItem("BTech", "BTech"),
+            new SelectItem("BSc", "BSc"),
+            new SelectItem("MSc", "MSc"),
+            new SelectItem("MBBS", "MBBS")
+        });
+
+        SelectItemGroup others = new SelectItemGroup("Others");
+        others.setSelectItems(new SelectItem[]{
+            new SelectItem("BCom", "BCom"),
+            new SelectItem("MCom", "MCom"),
+            new SelectItem("MCom", "MCom"),
+            new SelectItem("BA", "BA"),
+            new SelectItem("CA", "CA")
+        });
+
+        countries.add(science);
+        countries.add(others);
+    }
+    
+    
+
+	
+	
+	
+	
+	
+	
+	
 
 	private User user = new User();
+	
+//	@PathPattern("//W{1}")
+	@Parameter
+	@Deferred
+	private String id;
 
 	private boolean skip;
 
@@ -43,9 +95,20 @@ public class UserWizard implements Serializable {
 	private LocalDate divorceDate;
 	
 	private LocalDate widowDate;
+	
+	public boolean reviewFlag = true;
 
-	@Autowired
-	public UserWizard() {
+//	@Autowired
+//	public ProfileController() {
+//		System.out.println("id of person is: "+id);
+//		user = new User();
+//		familyMemberList = new ArrayList<FamilyMember>();
+//	}
+	
+	@PostConstruct
+	public void loadProfileId() {
+		System.out.println("Profile: inside PostContruct");
+		//getId();
 		user = new User();
 		familyMemberList = new ArrayList<FamilyMember>();
 	}
@@ -56,6 +119,17 @@ public class UserWizard implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String firstName;
+	public String getFirstName() {
+		System.out.println("Profile: getFirstName");
+		return "firstName from Profile";
+	}
+	
+	public void setFirstName(String firstName) {
+		System.out.println("Profile: setFirstName");
+		firstName = this.firstName;
 	}
 
 	public void save() {
@@ -196,8 +270,49 @@ public class UserWizard implements Serializable {
 
 	public String whoAmIColor;
 	public String whoAmI;
+	
+	
+	public String reviewOrEdit;
+	public boolean profileSelected;
+	public boolean moreInformationSelected;
+	public boolean familySelected;
+	public boolean noneSelected;
+	
+	public void reviewOrEdit(Object reviewOrEditLocal) {
+		reviewOrEdit = (String) reviewOrEditLocal;
 
-	public void whoAreYou(Object whoamILocal) {
+		System.out.println(reviewOrEditLocal);
+
+		switch ((String) reviewOrEditLocal) {
+			case "profile":
+				profileSelected = true;
+				moreInformationSelected = false;
+				familySelected = false;
+				noneSelected = false;
+				break;
+			case "moreInformation":
+				profileSelected = false;
+				moreInformationSelected = true;
+				familySelected = false;
+				noneSelected = false;
+				break;
+			case "family":
+				profileSelected = false;
+				moreInformationSelected = false;
+				familySelected = true;
+				noneSelected = false;
+				break;
+			case "none":
+				profileSelected = false;
+				moreInformationSelected = false;
+				familySelected = false;
+				noneSelected = true;
+			default:
+				System.out.println("none of the above");
+		}
+	}
+
+	public void whoAreYou(Object whoamILocal) {	
 		whoAmI = (String) whoamILocal;
 		//return onFlowProcess(new FlowEvent(null, "personInformationId", "personal"));
 
@@ -298,7 +413,7 @@ public class UserWizard implements Serializable {
 				System.out.println("none of the above");
 		}
 	}
-
+	
 	public void onRowEdit(RowEditEvent<Product> event) {
 		FacesMessage msg = new FacesMessage("Product Edited", String.valueOf(event.getObject()));
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -317,6 +432,61 @@ public class UserWizard implements Serializable {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
 					"Old: " + oldValue + ", New:" + newValue);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+	}
+	
+	String editOrSave = null;
+	boolean reviewFlagPersonal = true;
+	boolean reviewFlagAboutMe = true;
+	boolean reviewFlagFamily = true;
+	public void action(Object editOrSaveLocal) {
+		editOrSave = (String) editOrSaveLocal;
+		System.out.println(editOrSaveLocal);
+
+		switch ((String) editOrSaveLocal) {
+			case "nameAddEdit":
+				reviewFlagPersonal = false;
+				
+				reviewFlagAboutMe = true;
+				reviewFlagFamily = true;
+				
+				break;
+			case "nameAddSave":
+				reviewFlagPersonal = true;
+				
+				reviewFlagAboutMe = true;
+				reviewFlagFamily = true;
+				break;
+			case "aboutMeEdit":
+				reviewFlagAboutMe = false;
+				
+				reviewFlagPersonal = true;
+				reviewFlagFamily = true;
+				
+				break;
+			case "aboutMeSave":
+				reviewFlagAboutMe = true;
+				
+				reviewFlagPersonal = true;
+				reviewFlagFamily = true;
+				
+				break;
+			case "familyEdit":
+				reviewFlagFamily = false;
+				
+				reviewFlagPersonal = true;
+				reviewFlagAboutMe = true;
+				
+				break;
+			case "familySave":
+				reviewFlagFamily = true;
+				
+				reviewFlagPersonal = true;
+				reviewFlagAboutMe = true;
+				
+				break;
+			default:
+				System.out.println("none of the above on review page is selected");
 		}
 	}
 
@@ -564,5 +734,74 @@ public class UserWizard implements Serializable {
 
 	public void setOtherVillage(String otherVillage) {
 		this.otherVillage = otherVillage;
+	}
+
+	public String getId() {
+		System.out.println("Profile: getId");
+		return id;
+	}
+
+	public void setId(String id) {
+		System.out.println("Profile: setId");
+		HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		System.out.println(origRequest.getQueryString());
+		this.id = id;
+	}
+
+	public boolean isReviewFlag() {
+		return reviewFlag;
+	}
+
+	public void setReviewFlag(boolean reviewFlag) {
+		this.reviewFlag = reviewFlag;
+	}
+
+	public String getReviewOrEdit() {
+		return reviewOrEdit;
+	}
+
+	public void setReviewOrEdit(String reviewOrEdit) {
+		this.reviewOrEdit = reviewOrEdit;
+	}
+
+	public boolean isReviewFlagPersonal() {
+		return reviewFlagPersonal;
+	}
+
+	public void setReviewFlagPersonal(boolean reviewFlagPersonal) {
+		this.reviewFlagPersonal = reviewFlagPersonal;
+	}
+
+	public boolean isReviewFlagAboutMe() {
+		return reviewFlagAboutMe;
+	}
+
+	public void setReviewFlagAboutMe(boolean reviewFlagAboutMe) {
+		this.reviewFlagAboutMe = reviewFlagAboutMe;
+	}
+
+	public boolean isReviewFlagFamily() {
+		return reviewFlagFamily;
+	}
+
+	public void setReviewFlagFamily(boolean reviewFlagFamily) {
+		this.reviewFlagFamily = reviewFlagFamily;
+	}
+
+	public List<SelectItem> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(List<SelectItem> countries) {
+		this.countries = countries;
+	}
+
+	public String[] getSelectedCountries() {
+		System.out.println("selected countries are: "+selectedCountries);
+		return selectedCountries;
+	}
+
+	public void setSelectedCountries(String[] selectedCountries) {
+		this.selectedCountries = selectedCountries;
 	}
 }
